@@ -2,13 +2,6 @@
 # -*- coding: utf-8 -*-
 # Mais info no arquivo readme.txt
 
-#Movimento Uniforme
-travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
-travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
-
-#Movimento Uniformemente Variado
-travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
-travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
 
 #funcao para obter os instantes de tempo para a simulacao
 def le_dados(filename):
@@ -80,13 +73,22 @@ def simula_pontos(dados_cron,pontos,arquivo_saida):
 
     f.close()
     print "Arquivo %s criado.\n\n" %arquivo_saida
+def main():
+    #Movimento Uniforme
+    travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
+    travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
 
+    #Movimento Uniformemente Variado
+    travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
+    travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
 
-dados_brutos_travessia1= "travessia1.txt"
-dados_travessia1 = le_dados(dados_brutos_travessia1)
-simula_pontos(travessia1,dados_travessia1,"projecao1.txt")
+    dados_brutos_travessia1= "travessia1.txt"
+    dados_travessia1 = le_dados(dados_brutos_travessia1)
+    simula_pontos(travessia1,dados_travessia1,"projecao1.txt")
 
-dados_brutos_travessia2= "travessia2.txt"
-dados_travessia2 = le_dados(dados_brutos_travessia2)
-simula_pontos(travessia2,dados_travessia2,"projecao2.txt")
+    dados_brutos_travessia2= "travessia2.txt"
+    dados_travessia2 = le_dados(dados_brutos_travessia2)
+    simula_pontos(travessia2,dados_travessia2,"projecao2.txt")
 
+if __name__ == "__main__":
+    main()
