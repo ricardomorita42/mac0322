@@ -55,6 +55,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
         #instante a instante, recalculando a velocidade atual para
         #cada instante que estamos plotando.
         acel_media = [ 5 / x for x in vel_media]
+		
         print "acel. media: %s" %acel_media
 
         ativacao = [(5 / delta_v) for delta_v in vel_media]
@@ -73,24 +74,48 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
     ponto_anterior = 0.0
     posicao_anterior = 0.0
+	
+	
+    if tipo_mov == 0:	#caso seja MU, precisamos usar S = Vo * t
+	
+        for ponto_atual in pontos:
+            delta_t = ponto_atual - ponto_anterior
 
-    for ponto_atual in pontos:
-        delta_t = ponto_atual - ponto_anterior
+            if ponto_atual <= ativacao[0]: #trecho de vel 1
+                delta_s = vel_media[0] * delta_t
+                s = (posicao_anterior + delta_s)
 
-        if ponto_atual <= ativacao[0]: #trecho de vel 1
-            delta_s = vel_media[0] * delta_t
-            s = (posicao_anterior + delta_s)
-
-        else: #trecho de vel 2
-            delta_s = vel_media[1] * delta_t
-            s = (posicao_anterior + delta_s)
+            else: #trecho de vel 2
+                delta_s = vel_media[1] * delta_t
+                s = (posicao_anterior + delta_s)
 
 
-        f.write(str(round(ponto_atual,3)) + ',' + str(round(s,3)) + '\n')
+            f.write(str(round(ponto_atual,3)) + ',' + str(round(s,3)) + '\n')
 
-        ponto_anterior = ponto_atual
-        posicao_anterior = s
+            ponto_anterior = ponto_atual
+            posicao_anterior = s
+		
+    else:	#caso seja MUV, precisamos apenas usar S = a * t²/2
+	
+        for ponto_atual in pontos:
+            delta_t = ponto_atual - ponto_anterior
+			
+            if ponto_atual <= ativacao[0]: #trecho de acel 1
+                delta_s = acel_media[0] * (delta_t * delta_t) / 2
+                s = (posicao_anterior + delta_s)
 
+            else: #trecho de acel 2
+                    delta_s = acel_media[1] * (delta_t * delta_t) / 2
+                    s = (posicao_anterior + delta_s)
+
+
+            f.write(str(round(ponto_atual,3)) + ',' + str(round(s,3)) + '\n')
+
+            ponto_anterior = ponto_atual
+            posicao_anterior = s
+	
+	
+	
     f.close()
     print "Arquivo %s criado.\n\n" %arquivo_saida
 
@@ -130,20 +155,20 @@ def main():
     dados_travessia2 = le_dados(dados_brutos_travessia2)
     simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMu2.csv")
 
-   #travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
-   #travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
+    travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
+    travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
 
     #Movimento Uniformemente Variado
-   #travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
-   #travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
+    travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
+    travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
 
-   #dados_brutos_travessia1= "travessia1.txt"
-   #dados_travessia1 = le_dados(dados_brutos_travessia1)
-   #simula_pontos(travessia1,dados_travessia1,"projecao1.txt")
+    dados_brutos_travessia1= "travessia1.txt"
+    dados_travessia1 = le_dados(dados_brutos_travessia1)
+    simula_pontos(1, travessia1,dados_travessia1,"projecaoMuv1.csv")
 
-   #dados_brutos_travessia2= "travessia2.txt"
-   #dados_travessia2 = le_dados(dados_brutos_travessia2)
-   #simula_pontos(travessia2,dados_travessia2,"projecao2.txt")
+    dados_brutos_travessia2= "travessia2.txt"
+    dados_travessia2 = le_dados(dados_brutos_travessia2)
+    simula_pontos(1, travessia2,dados_travessia2,"projecaoMuv2.csv")
 
 if __name__ == "__main__":
     main()
