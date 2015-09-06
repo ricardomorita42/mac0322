@@ -38,7 +38,6 @@ def simula_pontos(dados_cron,pontos,arquivo_saida):
 
     #tempo e cumulativo em cada etapa, portanto somamos
     ativacao[1] = ativacao[1] + ativacao[0]
-    ativacao[2] = ativacao[2] + ativacao[1]
     print "tempo simulado para tocar sensor:\n%s" %ativacao
 
     #Agora calculamos ponto a ponto o delta_s de acordo
@@ -58,13 +57,10 @@ def simula_pontos(dados_cron,pontos,arquivo_saida):
             delta_s = vel_media[0] * delta_t
             s = (posicao_anterior + delta_s)
 
-        elif ponto_atual <= ativacao[1]:#trecho de vel 2
+        else: #trecho de vel 2
             delta_s = vel_media[1] * delta_t
             s = (posicao_anterior + delta_s)
 
-        else: #trecho de vel 3
-            delta_s = vel_media[2] * delta_t
-            s = (posicao_anterior + delta_s)
 
         f.write(str(round(ponto_atual,3)) + ',' + str(round(s,3)) + '\n')
 
@@ -74,21 +70,51 @@ def simula_pontos(dados_cron,pontos,arquivo_saida):
     f.close()
     print "Arquivo %s criado.\n\n" %arquivo_saida
 def main():
-    #Movimento Uniforme
-    travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
-    travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
+    #Dados obtidos no experimento
+    mu1 = ((4.05,4.12),(8.02,7.90))
+    mu2 = ((3.33,4.08),(7.70,9.01))
+    mu3 = ((4.08,4.12),(7.89,9.29))
+    mu4 = ((3.79,5.01),(8.41,9.59))
+    mu5 = ((3.50,3.50),(7.63,7.62)) # falha no sensor
+    mu6 = ((3.09,3.49),(8.02,6.65))
+    mu7 = ((3.84,3.46),(7.49,7.35))
+    mu8 = ((3.56,4.23),(7.63,8.06))
+    mu9 = ((4.16,4.11),(7.97,8.07))
+    mu10= ((3.11,2.27),(6.33,5.73))
+    mu11= ((2.27,2.92),(5.67,5.67)) # falha no sensor
+    mu12= ((3.67,3.67),(7.05,7.05)) # falha no sensor
 
-    #Movimento Uniformemente Variado
-    travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
-    travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
+    muv1 =((1.93,2.02),(4.83,4.33))
+    muv2 =((3.36,3.26),(5.09,4.70))
+    muv3 =((3.65,3.86),(7.54,6.08))
+    muv4 =((2.61,2.71),(5.30,4.93))
+    muv5 =((2.33,2.83),(4.64,4.92))
+    muv6 =((2.79,2.52),(3.79,3.44))
+    muv7 =((1.62,1.43),(2.68,2.47))
+    muv8 =((2.54,2.58),(3.52,3.78))
+    muv9 =((2.38,2.35),(3.61,3.70))
+    muv10=((1.90,2.55),(3.38,3.99))
+    muv11=((1.50,2.07),(2.92,3.61))
+    muv12=((2.73,3.11),(4.00,4.36))
 
     dados_brutos_travessia1= "travessia1.txt"
     dados_travessia1 = le_dados(dados_brutos_travessia1)
-    simula_pontos(travessia1,dados_travessia1,"projecao1.txt")
+    simula_pontos(mu1,dados_travessia1,"projecaoMu1.txt")
 
-    dados_brutos_travessia2= "travessia2.txt"
-    dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(travessia2,dados_travessia2,"projecao2.txt")
+   #travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
+   #travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
+
+    #Movimento Uniformemente Variado
+   #travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
+   #travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
+
+   #dados_brutos_travessia1= "travessia1.txt"
+   #dados_travessia1 = le_dados(dados_brutos_travessia1)
+   #simula_pontos(travessia1,dados_travessia1,"projecao1.txt")
+
+   #dados_brutos_travessia2= "travessia2.txt"
+   #dados_travessia2 = le_dados(dados_brutos_travessia2)
+   #simula_pontos(travessia2,dados_travessia2,"projecao2.txt")
 
 if __name__ == "__main__":
     main()
