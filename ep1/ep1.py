@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # Mais info no arquivo readme.txt
 
+DELTA_INTERVALO = 5 #Tamanho do intervalo, em metros
+
 
 #funcao para obter os instantes de tempo para a simulacao
 def le_dados(filename):
@@ -28,7 +30,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
     tempo_medio.insert(0,tempo_ini)
     print "tempo medio entre cada sensor: %s" %tempo_medio
 
-    vel_media = [ 5 / x for x in tempo_medio]
+    vel_media = [ DELTA_INTERVALO / x for x in tempo_medio]
     print "vel media: %s" %vel_media
 
     #calculando as velocidades
@@ -42,11 +44,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
         #delta_t = delta_s / vel_media
         #calculando quanto tempo demorou para passar 5m com a-
         #quela velocidade media e salvamos em ativacao
-        ativacao = [(5 / delta_v) for delta_v in vel_media]
-
-        #tempo e cumulativo em cada etapa, portanto somamos
-        ativacao[1] = ativacao[1] + ativacao[0]
-        print "tempo simulado para tocar sensor:\n%s" %ativacao
+        ativacao = [(DELTA_INTERVALO / delta_v) for delta_v in vel_media]
 
 
     else: #MOVIMENTO UNIFORMENTE VARIADO
@@ -54,16 +52,35 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
         #a aceleração média de cada trecho e assim calcular a posição
         #instante a instante, recalculando a velocidade atual para
         #cada instante que estamos plotando.
-        acel_media = [ 5 / x for x in vel_media]
-		
-        print "acel. media: %s" %acel_media
+        #isolando a em s = so + vo*t + a*t^2/2, temos:
+        acel_media = []
+        vel_final_trecho = [0]
 
-        ativacao = [(5 / delta_v) for delta_v in vel_media]
+        for idx,t in enumerate(tempo_medio):
+            acel = 3
+            acel = (2 *(DELTA_INTERVALO - vel_final_trecho[idx] * tempo_medio[idx]))/(t**2)
+            vel_final = vel_final_trecho[idx] + acel*t
+            acel_media.append(acel)
+            vel_final_trecho.append(vel_final)
 
-        #tempo e cumulativo em cada etapa, portanto somamos
-        ativacao[1] = ativacao[1] + ativacao[0]
-        print "tempo simulado para tocar sensor:\n%s" %ativacao
+        #t = (v - v0)/a
+        #ativacao[] guarda os instantes em que cada trecho é alcançado
 
+        ativacao = []
+
+        for idx,acel in enumerate(acel_media):
+            if idx is 0:
+                t = vel_final_trecho[idx] / acel
+            else:
+                t = (vel_final_trecho[idx] - vel_final_trecho[idx-1] / acel)
+            ativacao.append(t)
+
+
+    #tempo e cumulativo em cada etapa, portanto somamos
+    for idx,val in enumerate(ativacao):
+        if idx != 0:
+            ativacao[idx] = ativacao[idx] + ativacao[idx - 1]
+    print "tempo simulado para tocar sensor:\n%s" %ativacao
 
     #Agora calculamos ponto a ponto o delta_s de acordo
     #com a velocidade no trecho. Cada ponto eh calculado baseado
@@ -74,10 +91,10 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
     ponto_anterior = 0.0
     posicao_anterior = 0.0
-	
-	
+
+
     if tipo_mov == 0:	#caso seja MU, precisamos usar S = Vo * t
-	
+
         for ponto_atual in pontos:
             delta_t = ponto_atual - ponto_anterior
 
@@ -94,12 +111,12 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
             ponto_anterior = ponto_atual
             posicao_anterior = s
-		
+
     else:	#caso seja MUV, precisamos apenas usar S = a * t²/2
-	
+
         for ponto_atual in pontos:
             delta_t = ponto_atual - ponto_anterior
-			
+
             if ponto_atual <= ativacao[0]: #trecho de acel 1
                 delta_s = acel_media[0] * (delta_t * delta_t) / 2
                 s = (posicao_anterior + delta_s)
@@ -113,9 +130,9 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
             ponto_anterior = ponto_atual
             posicao_anterior = s
-	
-	
-	
+
+
+
     f.close()
     print "Arquivo %s criado.\n\n" %arquivo_saida
 
@@ -147,28 +164,13 @@ def main():
     muv11=((1.50,2.07),(2.92,3.61))
     muv12=((2.73,3.11),(4.00,4.36))
 
-    dados_brutos_travessia1= "entradas/travessia1.csv"
+    dados_brutos_travessia1= "entradas/mu1.csv"
     dados_travessia1 = le_dados(dados_brutos_travessia1)
     simula_pontos(0,mu1,dados_travessia1,"saidas/projecaoMu1.csv")
 
-    dados_brutos_travessia2= "entradas/travessia2.csv"
+    dados_brutos_travessia2= "entradas/muv1.csv"
     dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMu2.csv")
-
-    travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
-    travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
-
-    #Movimento Uniformemente Variado
-    travessia3 = ((2.6,3.04),(4.78,4.48),(6.62,7.15))
-    travessia4 = ((1.88,2.19),(3.76,3.38),(4.38,5.06))
-
-    dados_brutos_travessia1= "travessia1.txt"
-    dados_travessia1 = le_dados(dados_brutos_travessia1)
-    simula_pontos(1, travessia1,dados_travessia1,"projecaoMuv1.csv")
-
-    dados_brutos_travessia2= "travessia2.txt"
-    dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(1, travessia2,dados_travessia2,"projecaoMuv2.csv")
+    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMuv1.csv")
 
 if __name__ == "__main__":
     main()
