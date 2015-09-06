@@ -18,27 +18,50 @@ def le_dados(filename):
 #   Recebe uma tupla com os dados do cronometro, uma lista
 #   com os pontos a simula e um nome de arquivo de destino.
 #   Salva a saida em um .csv.
-def simula_pontos(dados_cron,pontos,arquivo_saida):
+def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
     print "Preparando %s..." %arquivo_saida
 
-    #calculando as velocidades
     tempo_medio = [(x[0] + x[1])/2 for x in dados_cron]
     tempo_ini = tempo_medio[0]
     tempo_medio = [y - x for x,y in zip(tempo_medio,tempo_medio[1:])]
     tempo_medio.insert(0,tempo_ini)
     print "tempo medio entre cada sensor: %s" %tempo_medio
-    vel_media = [ 4 / x for x in tempo_medio]
+
+    vel_media = [ 5 / x for x in tempo_medio]
     print "vel media: %s" %vel_media
 
-    #calculando os instantes em que cada sensor e ativado
-    #delta_t = delta_s / vel_media
-    #calculando quanto tempo demorou para passar 4m com a-
-    #quela velocidade media
-    ativacao = [(4 / delta_v) for delta_v in vel_media]
+    #calculando as velocidades
 
-    #tempo e cumulativo em cada etapa, portanto somamos
-    ativacao[1] = ativacao[1] + ativacao[0]
-    print "tempo simulado para tocar sensor:\n%s" %ativacao
+    if tipo_mov == 0: #MOVIMENTO UNIFORME
+        #Se o movimento é retilíneo uniforme, calculamos a
+        #velocidade média de cada um dos dois trechos e com esta
+        #podemos plotar qual a posicao no espaco naquele instante.
+
+        #calculando os instantes em que cada sensor e ativado
+        #delta_t = delta_s / vel_media
+        #calculando quanto tempo demorou para passar 5m com a-
+        #quela velocidade media e salvamos em ativacao
+        ativacao = [(5 / delta_v) for delta_v in vel_media]
+
+        #tempo e cumulativo em cada etapa, portanto somamos
+        ativacao[1] = ativacao[1] + ativacao[0]
+        print "tempo simulado para tocar sensor:\n%s" %ativacao
+
+
+    else: #MOVIMENTO UNIFORMENTE VARIADO
+        #Caso o movimento seja uniformente variado, podemos obter
+        #a aceleração média de cada trecho e assim calcular a posição
+        #instante a instante, recalculando a velocidade atual para
+        #cada instante que estamos plotando.
+        acel_media = [ 5 / x for x in vel_media]
+        print "acel. media: %s" %acel_media
+
+        ativacao = [(5 / delta_v) for delta_v in vel_media]
+
+        #tempo e cumulativo em cada etapa, portanto somamos
+        ativacao[1] = ativacao[1] + ativacao[0]
+        print "tempo simulado para tocar sensor:\n%s" %ativacao
+
 
     #Agora calculamos ponto a ponto o delta_s de acordo
     #com a velocidade no trecho. Cada ponto eh calculado baseado
@@ -69,6 +92,7 @@ def simula_pontos(dados_cron,pontos,arquivo_saida):
 
     f.close()
     print "Arquivo %s criado.\n\n" %arquivo_saida
+
 def main():
     #Dados obtidos no experimento
     mu1 = ((4.05,4.12),(8.02,7.90))
@@ -99,7 +123,11 @@ def main():
 
     dados_brutos_travessia1= "travessia1.txt"
     dados_travessia1 = le_dados(dados_brutos_travessia1)
-    simula_pontos(mu1,dados_travessia1,"projecaoMu1.txt")
+    simula_pontos(0,mu1,dados_travessia1,"projecaoMu1.csv")
+
+    dados_brutos_travessia2= "travessia2.txt"
+    dados_travessia2 = le_dados(dados_brutos_travessia2)
+    simula_pontos(1,muv1,dados_travessia2,"projecaoMu2.csv")
 
    #travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
    #travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
