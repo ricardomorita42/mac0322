@@ -121,13 +121,13 @@ def main():
     muv11=((1.50,2.07),(2.92,3.61))
     muv12=((2.73,3.11),(4.00,4.36))
 
-    dados_brutos_travessia1= "travessia1.txt"
+    dados_brutos_travessia1= "entradas/travessia1.csv"
     dados_travessia1 = le_dados(dados_brutos_travessia1)
-    simula_pontos(0,mu1,dados_travessia1,"projecaoMu1.csv")
+    simula_pontos(0,mu1,dados_travessia1,"saidas/projecaoMu1.csv")
 
-    dados_brutos_travessia2= "travessia2.txt"
+    dados_brutos_travessia2= "entradas/travessia2.csv"
     dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(1,muv1,dados_travessia2,"projecaoMu2.csv")
+    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMu2.csv")
 
    #travessia1 = ((3.42,3.5),(6.96,7.07),(10.71,11.64))
    #travessia2 = ((3.59,3.59),(7.31,7.23),(11.54,11.09)) #falha no sensor
