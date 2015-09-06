@@ -54,14 +54,13 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
         #cada instante que estamos plotando.
         #isolando a em s = so + vo*t + a*t^2/2, temos:
         acel_media = []
-        vel_final_trecho = [0]
+        vel_inicial_trecho = [0]
 
         for idx,t in enumerate(tempo_medio):
-            acel = 3
-            acel = (2 *(DELTA_INTERVALO - vel_final_trecho[idx] * tempo_medio[idx]))/(t**2)
-            vel_final = vel_final_trecho[idx] + acel*t
+            acel = (2 *(DELTA_INTERVALO - vel_inicial_trecho[idx] * tempo_medio[idx]))/(t**2)
+            vel_final = vel_inicial_trecho[idx] + acel*t
             acel_media.append(acel)
-            vel_final_trecho.append(vel_final)
+            vel_inicial_trecho.append(vel_final)
 
         #t = (v - v0)/a
         #ativacao[] guarda os instantes em que cada trecho é alcançado
@@ -70,10 +69,13 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
         for idx,acel in enumerate(acel_media):
             if idx is 0:
-                t = vel_final_trecho[idx] / acel
+                t = vel_inicial_trecho[idx] / acel
             else:
-                t = (vel_final_trecho[idx] - vel_final_trecho[idx-1] / acel)
+                t = (vel_inicial_trecho[idx] - vel_inicial_trecho[idx-1] / acel)
             ativacao.append(t)
+
+        print "acel_media: %s" %acel_media
+        print "vel no fim de cada trecho: %s" %vel_inicial_trecho
 
 
     #tempo e cumulativo em cada etapa, portanto somamos
