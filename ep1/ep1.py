@@ -8,6 +8,7 @@ def le_dados(filename):
     with open(filename, "r") as f:
         content = f.readlines()
 
+    content.pop(0) #removendo a 1a linha do csv que contem o nome da coluna
     content = [x.strip("\n") for x in content]
     content = [float(x) for x in content]
     ponto_zero = content[0]
