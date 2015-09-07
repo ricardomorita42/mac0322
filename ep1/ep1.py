@@ -57,7 +57,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
         vel_inicial_trecho = [0]
 
         for idx,t in enumerate(tempo_medio):
-            acel = (2 *(DELTA_INTERVALO - vel_inicial_trecho[idx] * tempo_medio[idx]))/(t**2)
+            acel = 2 *(DELTA_INTERVALO - vel_inicial_trecho[idx] * t)/(t**2)
             vel_final = vel_inicial_trecho[idx] + acel*t
             acel_media.append(acel)
             vel_inicial_trecho.append(vel_final)
@@ -69,9 +69,9 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
         for idx,acel in enumerate(acel_media):
             if idx is 0:
-                t = vel_inicial_trecho[idx] / acel
+                t = vel_inicial_trecho[idx+1] / acel
             else:
-                t = (vel_inicial_trecho[idx] - vel_inicial_trecho[idx-1] / acel)
+                t = (vel_inicial_trecho[idx+1] - vel_inicial_trecho[idx] / acel)
             ativacao.append(t)
 
         print "acel_media: %s" %acel_media
@@ -170,9 +170,9 @@ def main():
     dados_travessia1 = le_dados(dados_brutos_travessia1)
     simula_pontos(0,mu1,dados_travessia1,"saidas/projecaoMu1.csv")
 
-    dados_brutos_travessia2= "entradas/muv1.csv"
+    dados_brutos_travessia2= "entradas/muv2.csv"
     dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMuv1.csv")
+    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMuv2.csv")
 
 if __name__ == "__main__":
     main()
