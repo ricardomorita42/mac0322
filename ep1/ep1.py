@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Mais info no arquivo readme.txt
+#
+#   Nomes:                              no. USP:
+#       Bruno Guilherme Ricci Lucas         4460596
+#       Lucas Hiroshi Hayashida             7557630
+#       Ricardo Mikio Morita                5412562
+#
 
 DELTA_INTERVALO = 5 #Tamanho do intervalo, em metros
 
@@ -172,13 +177,13 @@ def main():
     muv10=((1.90,2.55),(3.38,3.99))
     muv11=((1.50,2.07),(2.92,3.61))
     muv12=((2.73,3.11),(4.00,4.36))
-    
+
     #Lista contendo todos os dados dos cronômetros de cada experimentos.
     #Isso foi feito para que possamos simular todos os experimentos em forma de loop
     #sem a necessidade de ter que copiar e colar vinte e quatro vezes as mesmas três linhas
     mu = [mu1, mu2, mu3, mu4, mu5, mu6, mu7, mu8, mu9, mu10, mu11, mu12]
     muv = [muv1, muv2, muv3, muv4, muv5, muv6, muv7,muv8, muv9, muv10, muv11, muv12]
-    
+
     #index criado para rodar entre todos os arquivos numerados de 1 a 12
     idx = 1
     for i in mu:
@@ -186,7 +191,7 @@ def main():
         dados_travessia = le_dados(dados_brutos_travessia)
         simula_pontos(0,i,dados_travessia,"saidas/projecaoMu%d.csv" %idx)
         idx += 1
-    
+
     idx = 1
     for i in muv:
         dados_brutos_travessia= "entradas/muv%d.csv" %idx
