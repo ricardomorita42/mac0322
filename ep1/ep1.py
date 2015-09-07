@@ -172,103 +172,27 @@ def main():
     muv10=((1.90,2.55),(3.38,3.99))
     muv11=((1.50,2.07),(2.92,3.61))
     muv12=((2.73,3.11),(4.00,4.36))
-
-    dados_brutos_travessia1= "entradas/mu1.csv"
-    dados_travessia1 = le_dados(dados_brutos_travessia1)
-    simula_pontos(0,mu1,dados_travessia1,"saidas/projecaoMu1.csv")
-
-    dados_brutos_travessia2= "entradas/mu2.csv"
-    dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(0,mu2,dados_travessia2,"saidas/projecaoMu2.csv")
-
-    dados_brutos_travessia3= "entradas/mu3.csv"
-    dados_travessia3 = le_dados(dados_brutos_travessia3)
-    simula_pontos(0,mu3,dados_travessia3,"saidas/projecaoMu3.csv")
-
-    dados_brutos_travessia4= "entradas/mu4.csv"
-    dados_travessia4 = le_dados(dados_brutos_travessia4)
-    simula_pontos(0,mu4,dados_travessia4,"saidas/projecaoMu4.csv")
-
-    dados_brutos_travessia5= "entradas/mu5.csv"
-    dados_travessia5 = le_dados(dados_brutos_travessia5)
-    simula_pontos(0,mu5,dados_travessia5,"saidas/projecaoMu5.csv")
-
-    dados_brutos_travessia6= "entradas/mu6.csv"
-    dados_travessia6 = le_dados(dados_brutos_travessia6)
-    simula_pontos(0,mu6,dados_travessia6,"saidas/projecaoMu6.csv")
-
-    dados_brutos_travessia7= "entradas/mu7.csv"
-    dados_travessia7 = le_dados(dados_brutos_travessia7)
-    simula_pontos(0,mu7,dados_travessia7,"saidas/projecaoMu7.csv")
-
-    dados_brutos_travessia8= "entradas/mu8.csv"
-    dados_travessia8 = le_dados(dados_brutos_travessia8)
-    simula_pontos(0,mu8,dados_travessia8,"saidas/projecaoMu8.csv")
-
-    dados_brutos_travessia9= "entradas/mu9.csv"
-    dados_travessia9 = le_dados(dados_brutos_travessia9)
-    simula_pontos(0,mu9,dados_travessia9,"saidas/projecaoMu9.csv")
-
-    dados_brutos_travessia10= "entradas/mu10.csv"
-    dados_travessia10 = le_dados(dados_brutos_travessia10)
-    simula_pontos(0,mu10,dados_travessia10,"saidas/projecaoMu10.csv")
-
-    dados_brutos_travessia11= "entradas/mu11.csv"
-    dados_travessia11 = le_dados(dados_brutos_travessia11)
-    simula_pontos(0,mu11,dados_travessia11,"saidas/projecaoMu11.csv")
-
-    dados_brutos_travessia12= "entradas/mu12.csv"
-    dados_travessia12 = le_dados(dados_brutos_travessia12)
-    simula_pontos(0,mu12,dados_travessia12,"saidas/projecaoMu12.csv")
-
-    dados_brutos_travessia_muv1= "entradas/muv1.csv"
-    dados_travessia1 = le_dados(dados_brutos_travessia_muv1)
-    simula_pontos(1,muv1,dados_travessia1,"saidas/projecaoMuv1.csv")
-
-    dados_brutos_travessia_muv2= "entradas/muv2.csv"
-    dados_travessia2 = le_dados(dados_brutos_travessia_muv2)
-    simula_pontos(1,muv2,dados_travessia2,"saidas/projecaoMuv2.csv")
-
-    dados_brutos_travessia_muv3= "entradas/muv3.csv"
-    dados_travessia3 = le_dados(dados_brutos_travessia_muv3)
-    simula_pontos(1,muv3,dados_travessia3,"saidas/projecaoMuv3.csv")
-
-    dados_brutos_travessia_muv4= "entradas/muv4.csv"
-    dados_travessia4 = le_dados(dados_brutos_travessia_muv4)
-    simula_pontos(1,muv4,dados_travessia4,"saidas/projecaoMuv4.csv")
-
-    dados_brutos_travessia_muv5= "entradas/muv5.csv"
-    dados_travessia5 = le_dados(dados_brutos_travessia_muv5)
-    simula_pontos(1,muv5,dados_travessia5,"saidas/projecaoMuv5.csv")
-
-    dados_brutos_travessia_muv6= "entradas/muv6.csv"
-    dados_travessia6 = le_dados(dados_brutos_travessia_muv6)
-    simula_pontos(1,muv6,dados_travessia6,"saidas/projecaoMuv6.csv")
-
-    dados_brutos_travessia_muv7= "entradas/muv7.csv"
-    dados_travessia7 = le_dados(dados_brutos_travessia_muv7)
-    simula_pontos(1,muv7,dados_travessia7,"saidas/projecaoMuv7.csv")
-
-    dados_brutos_travessia_muv8= "entradas/muv8.csv"
-    dados_travessia8 = le_dados(dados_brutos_travessia_muv8)
-    simula_pontos(1,muv8,dados_travessia8,"saidas/projecaoMuv8.csv")
-
-    dados_brutos_travessia_muv9= "entradas/muv9.csv"
-    dados_travessia9 = le_dados(dados_brutos_travessia_muv9)
-    simula_pontos(1,muv9,dados_travessia9,"saidas/projecaoMuv9.csv")
-
-    dados_brutos_travessia_muv10= "entradas/muv10.csv"
-    dados_travessia10 = le_dados(dados_brutos_travessia_muv10)
-    simula_pontos(1,muv10,dados_travessia10,"saidas/projecaoMuv10.csv")
-
-    dados_brutos_travessia_muv11= "entradas/muv11.csv"
-    dados_travessia11 = le_dados(dados_brutos_travessia_muv11)
-    simula_pontos(1,muv11,dados_travessia11,"saidas/projecaoMuv11.csv")
-
-    dados_brutos_travessia_muv12= "entradas/muv12.csv"
-    dados_travessia12 = le_dados(dados_brutos_travessia_muv12)
-    simula_pontos(1,muv12,dados_travessia12,"saidas/projecaoMuv12.csv")
-
+    
+    #Lista contendo todos os dados dos cronômetros de cada experimentos.
+    #Isso foi feito para que possamos simular todos os experimentos em forma de loop
+    #sem a necessidade de ter que copiar e colar vinte e quatro vezes as mesmas três linhas
+    mu = [mu1, mu2, mu3, mu4, mu5, mu6, mu7, mu8, mu9, mu10, mu11, mu12]
+    muv = [muv1, muv2, muv3, muv4, muv5, muv6, muv7,muv8, muv9, muv10, muv11, muv12]
+    
+    #index criado para rodar entre todos os arquivos numerados de 1 a 12
+    idx = 1
+    for i in mu:
+        dados_brutos_travessia= "entradas/mu%d.csv" %idx
+        dados_travessia = le_dados(dados_brutos_travessia)
+        simula_pontos(0,i,dados_travessia,"saidas/projecaoMu%d.csv" %idx)
+        idx += 1
+    
+    idx = 1
+    for i in muv:
+        dados_brutos_travessia= "entradas/muv%d.csv" %idx
+        dados_travessia = le_dados(dados_brutos_travessia)
+        simula_pontos(1,i,dados_travessia,"saidas/projecaoMuv%d.csv" %idx)
+        idx += 1
 
 if __name__ == "__main__":
     main()
