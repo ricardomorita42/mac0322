@@ -71,7 +71,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
             if idx is 0:
                 t = vel_inicial_trecho[idx+1] / acel
             else:
-                t = (vel_inicial_trecho[idx+1] - vel_inicial_trecho[idx] / acel)
+                t = (vel_inicial_trecho[idx+1] - vel_inicial_trecho[idx]) / acel
             ativacao.append(t)
 
         print "acel_media: %s" %acel_media
@@ -82,6 +82,7 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
     for idx,val in enumerate(ativacao):
         if idx != 0:
             ativacao[idx] = ativacao[idx] + ativacao[idx - 1]
+
     print "tempo simulado para tocar sensor:\n%s" %ativacao
 
     #Agora calculamos ponto a ponto o delta_s de acordo
@@ -93,6 +94,8 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
 
     ponto_anterior = 0.0
     posicao_anterior = 0.0
+    s = 0
+    velocidade = 0
 
 
     if tipo_mov == 0:	#caso seja MU, precisamos usar S = Vo * t
@@ -120,12 +123,16 @@ def simula_pontos(tipo_mov, dados_cron,pontos,arquivo_saida):
             delta_t = ponto_atual - ponto_anterior
 
             if ponto_atual <= ativacao[0]: #trecho de acel 1
+                velocidade = velocidade + acel_media[0] * delta_t
                 delta_s = acel_media[0] * (delta_t * delta_t) / 2
                 s = (posicao_anterior + delta_s)
+                #print s
 
-            else: #trecho de acel 2
-                    delta_s = acel_media[1] * (delta_t * delta_t) / 2
-                    s = (posicao_anterior + delta_s)
+            else: #trecho de acel 2 mas precisamos usar S = Vo * t a * t²/2
+                velocidade = velocidade + abs(acel_media[1] * delta_t)
+                delta_s = velocidade * delta_t + acel_media[1] * (delta_t * delta_t) / 2
+                s = (posicao_anterior + delta_s)
+                #print velocidade
 
 
             f.write(str(round(ponto_atual,3)) + ',' + str(round(s,3)) + '\n')
@@ -170,9 +177,98 @@ def main():
     dados_travessia1 = le_dados(dados_brutos_travessia1)
     simula_pontos(0,mu1,dados_travessia1,"saidas/projecaoMu1.csv")
 
-    dados_brutos_travessia2= "entradas/muv2.csv"
+    dados_brutos_travessia2= "entradas/mu2.csv"
     dados_travessia2 = le_dados(dados_brutos_travessia2)
-    simula_pontos(1,muv1,dados_travessia2,"saidas/projecaoMuv2.csv")
+    simula_pontos(0,mu2,dados_travessia2,"saidas/projecaoMu2.csv")
+
+    dados_brutos_travessia3= "entradas/mu3.csv"
+    dados_travessia3 = le_dados(dados_brutos_travessia3)
+    simula_pontos(0,mu3,dados_travessia3,"saidas/projecaoMu3.csv")
+
+    dados_brutos_travessia4= "entradas/mu4.csv"
+    dados_travessia4 = le_dados(dados_brutos_travessia4)
+    simula_pontos(0,mu4,dados_travessia4,"saidas/projecaoMu4.csv")
+
+    dados_brutos_travessia5= "entradas/mu5.csv"
+    dados_travessia5 = le_dados(dados_brutos_travessia5)
+    simula_pontos(0,mu5,dados_travessia5,"saidas/projecaoMu5.csv")
+
+    dados_brutos_travessia6= "entradas/mu6.csv"
+    dados_travessia6 = le_dados(dados_brutos_travessia6)
+    simula_pontos(0,mu6,dados_travessia6,"saidas/projecaoMu6.csv")
+
+    dados_brutos_travessia7= "entradas/mu7.csv"
+    dados_travessia7 = le_dados(dados_brutos_travessia7)
+    simula_pontos(0,mu7,dados_travessia7,"saidas/projecaoMu7.csv")
+
+    dados_brutos_travessia8= "entradas/mu8.csv"
+    dados_travessia8 = le_dados(dados_brutos_travessia8)
+    simula_pontos(0,mu8,dados_travessia8,"saidas/projecaoMu8.csv")
+
+    dados_brutos_travessia9= "entradas/mu9.csv"
+    dados_travessia9 = le_dados(dados_brutos_travessia9)
+    simula_pontos(0,mu9,dados_travessia9,"saidas/projecaoMu9.csv")
+
+    dados_brutos_travessia10= "entradas/mu10.csv"
+    dados_travessia10 = le_dados(dados_brutos_travessia10)
+    simula_pontos(0,mu10,dados_travessia10,"saidas/projecaoMu10.csv")
+
+    dados_brutos_travessia11= "entradas/mu11.csv"
+    dados_travessia11 = le_dados(dados_brutos_travessia11)
+    simula_pontos(0,mu11,dados_travessia11,"saidas/projecaoMu11.csv")
+
+    dados_brutos_travessia12= "entradas/mu12.csv"
+    dados_travessia12 = le_dados(dados_brutos_travessia12)
+    simula_pontos(0,mu12,dados_travessia12,"saidas/projecaoMu12.csv")
+
+    dados_brutos_travessia_muv1= "entradas/muv1.csv"
+    dados_travessia1 = le_dados(dados_brutos_travessia_muv1)
+    simula_pontos(1,muv1,dados_travessia1,"saidas/projecaoMuv1.csv")
+
+    dados_brutos_travessia_muv2= "entradas/muv2.csv"
+    dados_travessia2 = le_dados(dados_brutos_travessia_muv2)
+    simula_pontos(1,muv2,dados_travessia2,"saidas/projecaoMuv2.csv")
+
+    dados_brutos_travessia_muv3= "entradas/muv3.csv"
+    dados_travessia3 = le_dados(dados_brutos_travessia_muv3)
+    simula_pontos(1,muv3,dados_travessia3,"saidas/projecaoMuv3.csv")
+
+    dados_brutos_travessia_muv4= "entradas/muv4.csv"
+    dados_travessia4 = le_dados(dados_brutos_travessia_muv4)
+    simula_pontos(1,muv4,dados_travessia4,"saidas/projecaoMuv4.csv")
+
+    dados_brutos_travessia_muv5= "entradas/muv5.csv"
+    dados_travessia5 = le_dados(dados_brutos_travessia_muv5)
+    simula_pontos(1,muv5,dados_travessia5,"saidas/projecaoMuv5.csv")
+
+    dados_brutos_travessia_muv6= "entradas/muv6.csv"
+    dados_travessia6 = le_dados(dados_brutos_travessia_muv6)
+    simula_pontos(1,muv6,dados_travessia6,"saidas/projecaoMuv6.csv")
+
+    dados_brutos_travessia_muv7= "entradas/muv7.csv"
+    dados_travessia7 = le_dados(dados_brutos_travessia_muv7)
+    simula_pontos(1,muv7,dados_travessia7,"saidas/projecaoMuv7.csv")
+
+    dados_brutos_travessia_muv8= "entradas/muv8.csv"
+    dados_travessia8 = le_dados(dados_brutos_travessia_muv8)
+    simula_pontos(1,muv8,dados_travessia8,"saidas/projecaoMuv8.csv")
+
+    dados_brutos_travessia_muv9= "entradas/muv9.csv"
+    dados_travessia9 = le_dados(dados_brutos_travessia_muv9)
+    simula_pontos(1,muv9,dados_travessia9,"saidas/projecaoMuv9.csv")
+
+    dados_brutos_travessia_muv10= "entradas/muv10.csv"
+    dados_travessia10 = le_dados(dados_brutos_travessia_muv10)
+    simula_pontos(1,muv10,dados_travessia10,"saidas/projecaoMuv10.csv")
+
+    dados_brutos_travessia_muv11= "entradas/muv11.csv"
+    dados_travessia11 = le_dados(dados_brutos_travessia_muv11)
+    simula_pontos(1,muv11,dados_travessia11,"saidas/projecaoMuv11.csv")
+
+    dados_brutos_travessia_muv12= "entradas/muv12.csv"
+    dados_travessia12 = le_dados(dados_brutos_travessia_muv12)
+    simula_pontos(1,muv12,dados_travessia12,"saidas/projecaoMuv12.csv")
+
 
 if __name__ == "__main__":
     main()
