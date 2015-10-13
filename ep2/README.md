@@ -1,6 +1,6 @@
-![Fuck You s2](http://i.imgur.com/PV7ZGfh.jpg)
-
-
+<p align="center">
+  <img src ="http://i.imgur.com/PV7ZGfh.jpg">
+</p>
 
 Descrição dos arquivos
 ======================
