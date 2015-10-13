@@ -1,21 +1,23 @@
-Descrição dos arquivos:
-- entradas
+Descrição dos arquivos
+======================
+
+* **entradas**
     São os arquivos .csv que foram obtidos do celular com mínimo processamento.
     Também está incluido uma planilha contendo os dados resumidos e com um
     gráfico incluso.
 
-- entradasProcessadas
+* **entradasProcessadas**
     Contém os instantes em que cada experimento ocorre. Cada arquivo detalha os
     instantes em que foram coletados dados pelo celular. São sobre estes dados
     que a simulação será feita.
 
-- lib
+* **lib**
     Contém as funções que irão simular cada tipo de movimento.
     
-- dicasEP2.pdf
+* **dicasEP2.pdf**
     Encontrado no PACA, mantido aqui apenas como referência.
 
-- ep2.py
+* **ep2.py**
     Arquivo main do segundo EP. Pega os .csv de entradasProcessadas/ e joga elas
     nas funções em lib/ . as saídas serão salvas na pasta saidas/ .
     
