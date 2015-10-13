@@ -7,13 +7,12 @@
 #       Ricardo Mikio Morita                5412562
 #
 import sys
-sys.path.append('lib/')
+sys.path.append('lib/') #para poder ler as funcoes de lib/
 
+
+#Importando as funcoes de cada movimento
 import calc_circular
 
-#Variaveis Globais
-
-DELTA_INTERVALO = 5 #Tamanho do intervalo, em metros
 
 #funcao para obter os instantes de tempo para a simulacao
 def le_dados(filename):
@@ -34,6 +33,7 @@ def le_dados(filename):
 def simula_pontos(tipo_mov, lista_pontos, dados_experimento, arquivo_saida):
     if tipo_mov is "circular":
         calc_circular.simula(lista_pontos,dados_experimento,arquivo_saida)
+
 
 def main():
 
