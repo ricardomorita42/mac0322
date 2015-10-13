@@ -6,6 +6,8 @@
 #       Lucas Hiroshi Hayashida             7557630
 #       Ricardo Mikio Morita                5412562
 #
+import sys
+sys.path.append('lib/')
 
 import calc_circular
 
