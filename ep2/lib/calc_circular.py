@@ -12,8 +12,11 @@
 #   e um nome de arquivo de destino.
 #   Salva a saida em um .csv.
 
-def simula(dados_cron,arquivos_saida):
+def simula(lista_pontos, dados_experimento, arquivo_saida):
     print "cheguei no circular"
+    print dados_experimento
+    print lista_pontos[-1]
+    print "\n"
 
 '''
 def simula(dados_cron,arquivo_saida):

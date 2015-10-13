@@ -31,17 +31,24 @@ def le_dados(filename):
 #   Recebe uma tupla com os dados do cronometro, uma lista
 #   com os pontos a simula e um nome de arquivo de destino.
 #   Salva a saida em um .csv.
-def simula_pontos(tipo_mov, lista_pontos, arquivo_saida):
+def simula_pontos(tipo_mov, lista_pontos, dados_experimento, arquivo_saida):
     if tipo_mov is "circular":
-        calc_circular.simula(lista_pontos,arquivo_saida)
+        calc_circular.simula(lista_pontos,dados_experimento,arquivo_saida)
 
 def main():
-    #index criado para rodar entre todos os arquivos numerados de 1 a 12
+
+    #Simulando Movimento Circular
+    raio = 0.6
+    no_voltas = [0,5,6,6,5,6] #experimento 0 não existe
     idx = 1
     while idx <= 5:
+        dados_experimento = []
+        dados_experimento.append(raio)
+        dados_experimento.append(no_voltas[idx])
+
         dados_brutos_travessia= "entradasProcessadas/circular%d.csv" %idx
         dados_travessia = le_dados(dados_brutos_travessia)
-        simula_pontos("circular", dados_travessia, "saidas/circular%d.csv" %idx)
+        simula_pontos("circular",dados_travessia,dados_experimento,"saidas/circular%d.csv" %idx)
         idx += 1
 
 if __name__ == "__main__":
