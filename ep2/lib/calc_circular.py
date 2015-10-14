@@ -102,8 +102,8 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     y_anterior = y_atual
 
     for ponto_atual in lista_pontos:
-        teta = vel_ang * ponto_atual
         delta_t = ponto_atual - t_anterior
+        teta = vel_ang * delta_t
 
         x_atual = x_anterior + vel_x_anterior * delta_t
         y_atual = y_anterior + vel_y_anterior * delta_t
