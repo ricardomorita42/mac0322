@@ -103,6 +103,18 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
         x_atual = x_anterior + vel_x_anterior * delta_t
         y_atual = y_anterior + vel_y_anterior * delta_t
 
+        if x_atual < 0:
+            x_atual = x_atual % raio
+            x_atual = x_atual * -1
+        else:
+            x_atual = x_atual % raio
+
+        if y_atual < 0:
+            y_atual = y_atual % raio
+            y_atual = y_atual * -1
+        else:
+            y_atual = y_atual % raio
+
         vel_x_atual = vel_x_anterior + acel_x_anterior*delta_t
         vel_y_atual = vel_y_anterior + acel_y_anterior*delta_t
 
