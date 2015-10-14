@@ -16,7 +16,8 @@ import calc_circular
 
 #funcao para obter os instantes de tempo para a simulacao
 def le_dados(filename):
-    with open(filename, "r") as f:
+    arquivo = filename + '.csv'
+    with open(arquivo, "r") as f:
         content = f.readlines()
 
     content.pop(0) #removendo a 1a linha do csv que contem o nome da coluna
@@ -46,9 +47,9 @@ def main():
         dados_experimento.append(raio)
         dados_experimento.append(no_voltas[idx])
 
-        dados_brutos_travessia= "entradasProcessadas/circular%d.csv" %idx
+        dados_brutos_travessia= "entradasProcessadas/circular%d" %idx
         dados_travessia = le_dados(dados_brutos_travessia)
-        simula_pontos("circular",dados_travessia,dados_experimento,"saidas/circular%d.csv" %idx)
+        simula_pontos("circular",dados_travessia,dados_experimento,"saidas/circular%d" %idx)
         idx += 1
 
 if __name__ == "__main__":
