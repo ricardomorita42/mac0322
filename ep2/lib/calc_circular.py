@@ -15,6 +15,7 @@
 #   Referencias:
 #       https://en.wikipedia.org/wiki/Circular_motion
 #       https://en.wikipedia.org/wiki/Centripetal_force
+#       https://en.wikipedia.org/wiki/Small-angle_approximation
 
 import math
 
@@ -78,10 +79,14 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     vel_y_atual =      raio * vel_ang * math.cos(vel_ang*t_atual)
 
     #   A formula da aceleracao não é linear. Entretanto, para valores
-    #pequenos de teta, estamos considerando sen(teta) = teta,
-    #tornando esta equacao linear.
-    acel_x_atual = -1 * vel_ang ** 2 * raio * teta
-    acel_y_atual =  raio * teta
+    #pequenos de teta, estamos considerando:
+    #
+    #   sen(teta) = teta
+    #   cos(teta) = 1 - teta**2/2
+    #
+
+    acel_x_atual = -1 * vel_ang ** 2 * raio * (1 - teta**2/2)
+    acel_y_atual = -1 * vel_ang ** 2 * raio * teta
 
     f.write(str(round(t_atual,3)) + ',' +
             str(round(x_atual,3)) + ',' +
@@ -103,23 +108,11 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
         x_atual = x_anterior + vel_x_anterior * delta_t
         y_atual = y_anterior + vel_y_anterior * delta_t
 
-        if x_atual < 0:
-            x_atual = x_atual % raio
-            x_atual = x_atual * -1
-        else:
-            x_atual = x_atual % raio
-
-        if y_atual < 0:
-            y_atual = y_atual % raio
-            y_atual = y_atual * -1
-        else:
-            y_atual = y_atual % raio
-
         vel_x_atual = vel_x_anterior + acel_x_anterior*delta_t
         vel_y_atual = vel_y_anterior + acel_y_anterior*delta_t
 
-        acel_x_atual = -1 * vel_ang ** 2 * raio * teta
-        acel_y_atual =  raio * teta
+        acel_x_atual = -1 * vel_ang ** 2 * raio * (1 - teta**2/2)
+        acel_y_atual = -1 * vel_ang ** 2 * raio * teta
 
         f.write(str(round(ponto_atual,3)) + ',' +
                 str(round(x_atual,3)) + ',' +
