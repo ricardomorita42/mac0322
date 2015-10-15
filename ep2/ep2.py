@@ -63,7 +63,7 @@ def main():
 
     dados_experimento = []
     dados_experimento.append(angulo)
-    dados_experimento.append(algura_rampa)
+    dados_experimento.append(altura_rampa)
     dados_experimento.append(largura_rampa)
 
     idx = 1
