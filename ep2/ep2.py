@@ -59,16 +59,18 @@ def main():
     #Simulando descida em Plano inclinado
     angulo= 14.6            #graus
     altura_rampa = 0.6      #metros
-    largura_rampa = 1.5     #metros, eixo referencial é o próprio plano
+    largura_rampa = 2.0     #metros, eixo referencial é o próprio plano
 
     dados_experimento = []
     dados_experimento.append(angulo)
     dados_experimento.append(altura_rampa)
     dados_experimento.append(largura_rampa)
 
+    f = open('resumo_mov_inclinado.txt','w')
+    f.close()
+
     idx = 1
     while idx <= 5:
-
         dados_brutos_travessia= "entradasProcessadas/mov_inclinado%d" %idx
         dados_travessia = le_dados(dados_brutos_travessia)
         simula_pontos("inclinado",dados_travessia,dados_experimento,

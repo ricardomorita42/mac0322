@@ -33,7 +33,6 @@ def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
     altura_rampa = dados_experimento[1]
     largura_rampa= dados_experimento[2]
 
-
     inclinacao = angulo_rampa * math.pi / 180   #conversao para rads
     tempo = lista_pontos[-1]                    #Tempo total do experimento
 
@@ -61,7 +60,6 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     angulo_rampa = dados_experimento[0]
     altura_rampa = dados_experimento[1]
     largura_rampa= dados_experimento[2]
-
 
     inclinacao = angulo_rampa * math.pi / 180   #conversao para rads
     tempo = lista_pontos[-1]                    #Tempo total do experimento
@@ -100,6 +98,10 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
         s_anterior = s_atual
 
     f.close()
+
+    f2 = open("resumo_mov_inclinado.txt", 'a')
+    f2.write("Vf de %s: %f\n" %( arquivo_saida, v_atual))
+    f2.close()
 
     print "Arquivo %s criado.\n\n" %arquivo_saida
 

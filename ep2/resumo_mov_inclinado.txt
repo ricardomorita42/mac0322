@@ -1,0 +1,5 @@
+Vf de saidas/mov_inclinado1_euler.csv: 0.454597
+Vf de saidas/mov_inclinado2_euler.csv: 0.455425
+Vf de saidas/mov_inclinado3_euler.csv: 0.407332
+Vf de saidas/mov_inclinado4_euler.csv: 0.395570
+Vf de saidas/mov_inclinado5_euler.csv: 0.503018
