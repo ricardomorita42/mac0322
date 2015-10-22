@@ -42,7 +42,7 @@ def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
     print "Preparando %s..." %arquivo_saida
 
     f = open(arquivo_saida,'w')
-    f.write("Instante(s),Pos_x(m),Pos_y(m)\n")
+    f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
 
     for ponto_atual in lista_pontos:
         teta = vel_ang * ponto_atual
@@ -50,6 +50,7 @@ def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
         y = raio * math.sin(teta)
 
         f.write(str(round(ponto_atual,3)) + ',' +
+                str(round(teta,3)) + ',' +
                 str(round(x,3)) + ',' +
                 str(round(y,3)) + '\n')
 
@@ -69,7 +70,7 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     print "Preparando %s..." %arquivo_saida
 
     f = open(arquivo_saida,'w')
-    f.write("Instante(s),Pos_x(m),Pos_y(m)\n")
+    f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
 
     #Calculando Velocidade
     t_atual = lista_pontos.pop(0)
@@ -78,6 +79,7 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     y_atual = raio * math.sin(teta_atual)
 
     f.write(str(round(t_atual,3)) + ',' +
+            str(round(teta_atual,3)) + ',' +
             str(round(x_atual,3)) + ',' +
             str(round(y_atual,3)) + '\n')
 
@@ -97,6 +99,7 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
         y_atual = raio * math.sin(teta_atual)
 
         f.write(str(round(ponto_atual,3)) + ',' +
+                str(round(teta_atual,3)) + ',' +
                 str(round(x_atual,3)) + ',' +
                 str(round(y_atual,3)) + '\n')
 
@@ -126,7 +129,7 @@ def simula_euler_cromer(lista_pontos, dados_experimento,arquivo_saida):
     print "Preparando %s..." %arquivo_saida
 
     f = open(arquivo_saida,'w')
-    f.write("Instante(s),Pos_x(m),Pos_y(m)\n")
+    f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
 
     #Calculando Velocidade
     t_atual = lista_pontos.pop(0)
@@ -135,6 +138,7 @@ def simula_euler_cromer(lista_pontos, dados_experimento,arquivo_saida):
     y_atual = raio * math.sin(teta_atual)
 
     f.write(str(round(t_atual,3)) + ',' +
+            str(round(teta_atual,3)) + ',' +
             str(round(x_atual,3)) + ',' +
             str(round(y_atual,3)) + '\n')
 
@@ -154,6 +158,7 @@ def simula_euler_cromer(lista_pontos, dados_experimento,arquivo_saida):
         y_atual = raio * math.sin(teta_atual)
 
         f.write(str(round(ponto_atual,3)) + ',' +
+                str(round(teta_atual,3)) + ',' +
                 str(round(x_atual,3)) + ',' +
                 str(round(y_atual,3)) + '\n')
 
