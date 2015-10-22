@@ -1,0 +1,6 @@
+Seguem abaixo dados que serão usadas para verificação do programa:
+teta de saidas/circular1_euler.csv: 31.415927
+teta de saidas/circular2_euler.csv: 37.699112
+teta de saidas/circular3_euler.csv: 37.699112
+teta de saidas/circular4_euler.csv: 31.415927
+teta de saidas/circular5_euler.csv: 37.699112

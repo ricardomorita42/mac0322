@@ -99,6 +99,8 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
 
     f.close()
 
+    #Dá um output neste arquivo que é usado no relatório na parte de
+    #verificação do programa.
     f2 = open("resumo_mov_inclinado.txt", 'a')
     f2.write("Vf de %s: %f\n" %( arquivo_saida, v_atual))
     f2.close()

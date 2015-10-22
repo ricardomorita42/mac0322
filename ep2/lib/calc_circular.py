@@ -106,6 +106,10 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
 
     f.close()
 
+    f2 = open("resumo_mov_circular.txt", 'a')
+    f2.write("teta de %s: %f\n" %(arquivo_saida, teta_atual))
+    f2.close()
+
     print "Arquivo %s criado.\n\n" %arquivo_saida
 
 #Obs.: Como a velocidade angular é constante, o algoritmo de Euler-Cromer

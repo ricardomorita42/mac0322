@@ -41,9 +41,17 @@ def simula_pontos(tipo_mov, lista_pontos, dados_experimento, arquivo_saida):
 
 def main():
 
-    #Simulando Movimento Circular
+    ###Simulando Movimento Circular###
     raio = 0.6
     no_voltas = [0,5,6,6,5,6] #experimento 0 não existe
+
+    #O arquivo abaixo é usado na parte de verificação do programa do
+    #relatório. Cada vez que o programa é executado este arquivo é
+    #refeito; os calculos estao em lib/mov_inclinado.py
+    f = open('resumo_mov_circular.txt','w')
+    f.write("Seguem abaixo dados que serão usadas para verificação do programa:\n")
+    f.close()
+
     idx = 1
     while idx <= 5:
         dados_experimento = []
@@ -56,7 +64,7 @@ def main():
         idx += 1
 
 
-    #Simulando descida em Plano inclinado
+    ###Simulando descida em Plano inclinado###
     angulo= 14.6            #graus
     altura_rampa = 0.6      #metros
     largura_rampa = 2.0     #metros, eixo referencial é o próprio plano
@@ -66,7 +74,11 @@ def main():
     dados_experimento.append(altura_rampa)
     dados_experimento.append(largura_rampa)
 
+    #O arquivo abaixo é usado na parte de verificação do programa do
+    #relatório. Cada vez que o programa é executado este arquivo é
+    #refeito; os calculos estao em lib/mov_inclinado.py
     f = open('resumo_mov_inclinado.txt','w')
+    f.write("Seguem abaixo dados que serão usadas para verificação do programa:\n")
     f.close()
 
     idx = 1
