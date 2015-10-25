@@ -13,6 +13,9 @@ sys.path.append('lib/') #para poder ler as funcoes de lib/
 #Importando as funcoes de cada movimento
 import calc_circular
 import mov_inclinado
+import queda_livre
+import constantes
+import projetil
 
 
 #funcao para obter os instantes de tempo para a simulacao
@@ -37,14 +40,16 @@ def simula_pontos(tipo_mov, lista_pontos, dados_experimento, arquivo_saida):
         calc_circular.simula(lista_pontos,dados_experimento,arquivo_saida)
     if tipo_mov is "inclinado":
         mov_inclinado.simula(lista_pontos,dados_experimento,arquivo_saida)
-
+    if tipo_mov is "queda":
+        queda_livre.simula(lista_pontos,dados_experimento,arquivo_saida)
+    if tipo_mov == 1:
+        projetil.simula(lista_pontos, dados_experimento, arquivo_saida)
 
 def main():
 
     ###Simulando Movimento Circular###
     raio = 0.6
     no_voltas = [0,5,6,6,5,6] #experimento 0 não existe
-
     #O arquivo abaixo é usado na parte de verificação do programa do
     #relatório. Cada vez que o programa é executado este arquivo é
     #refeito; os calculos estao em lib/mov_inclinado.py
@@ -85,8 +90,35 @@ def main():
     while idx <= 5:
         dados_brutos_travessia= "entradasProcessadas/mov_inclinado%d" %idx
         dados_travessia = le_dados(dados_brutos_travessia)
-        simula_pontos("inclinado",dados_travessia,dados_experimento,
-                      "saidas/mov_inclinado%d" %idx)
+        simula_pontos("inclinado",dados_travessia,dados_experimento, "saidas/mov_inclinado%d" %idx)
+        idx += 1
+
+    ###Simulando Queda Livre###
+    dados_experimento = constantes.alturaq
+    f = open('resumo_queda_livre.txt', 'w')
+    f.write("Seguem abaixo dados que serao usados para verificacao do programa:\n")
+    f.close()
+    idx = 1
+    while idx <= 5:
+        dados_brutos_travessia = "entradasProcessadas/queda_livre%d" %idx
+        dados_travessia = le_dados(dados_brutos_travessia)
+        simula_pontos("queda", dados_travessia, constantes.alturaq, "saidas/queda_livre%d" %idx)
+
+        idx += 1
+
+    ###Simulando Projetil###
+    dados_experimento = []
+    dados_experimento.append(constantes.alturap)
+    dados_experimento.append(constantes.distancia)
+
+    f = open('resumo_projetil.txt', 'w')
+    f.write("Seguem abaixo dados que serao usados para verificacao do programa:\n")
+    f.close()
+    idx = 1
+    while idx <= 5:
+        dados_brutos_travessia = "entradasProcessadas/projetil%d" %idx
+        dados_travessia = le_dados(dados_brutos_travessia)
+        simula_pontos(1,dados_travessia,dados_experimento, "saidas/projetil%d" %idx)
         idx += 1
 
 

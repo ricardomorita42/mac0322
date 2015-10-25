@@ -1,0 +1,6 @@
+Seguem abaixo dados que serao usados para verificacao do programa:
+Af de saidas/queda_livre1_euler.csv: -0.115624
+Af de saidas/queda_livre2_euler.csv: -1.049462
+Af de saidas/queda_livre3_euler.csv: -2.302811
+Af de saidas/queda_livre4_euler.csv: 0.546188
+Af de saidas/queda_livre5_euler.csv: 0.320125

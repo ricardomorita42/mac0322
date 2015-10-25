@@ -26,7 +26,7 @@ def simula(lista_pontos, dados_experimento, arquivo_saida):
     simula_euler_cromer(lista_pontos, dados_experimento,arq_euler_cromer)
 
 
-def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
+def simula_analitico(lista_pontos, dados_experimento, arquivo_saida):
 
     #dados do experimento contêm a inclinação, altura e largura da rampa.
     angulo_rampa = dados_experimento[0]
