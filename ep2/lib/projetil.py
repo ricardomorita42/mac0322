@@ -30,7 +30,7 @@ def simula(lista_pontos, dados_experimento, arquivo_saida):
 #           dx/dt = vx_0
 def simula_euler(lista_pontos, dados_experimento, arquivo_saida):
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida, 'w')
     f.write("Instante(s),Pos_x(m),Pos_y(m)\n")
@@ -84,13 +84,13 @@ def simula_euler(lista_pontos, dados_experimento, arquivo_saida):
     f2.write("(xf, yf) de %s: (%f , %f)\n" %( arquivo_saida, a_atual, d_atual))
     f2.close()
 
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
 
 
 
 def simula_euler_cromer(lista_pontos, dados_experimento, arquivo_saida):
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida, 'w')
     f.write("Instante(s),Pos_x(m),Pos_y(m)\n")
@@ -133,4 +133,4 @@ def simula_euler_cromer(lista_pontos, dados_experimento, arquivo_saida):
     
     f.close()
     
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)

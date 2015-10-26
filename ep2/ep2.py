@@ -16,7 +16,7 @@ import mov_inclinado
 import queda_livre
 import constantes
 import projetil
-
+import mov_pendular
 
 #funcao para obter os instantes de tempo para a simulacao
 def le_dados(filename):
@@ -44,6 +44,8 @@ def simula_pontos(tipo_mov, lista_pontos, dados_experimento, arquivo_saida):
         queda_livre.simula(lista_pontos,dados_experimento,arquivo_saida)
     if tipo_mov == 1:
         projetil.simula(lista_pontos, dados_experimento, arquivo_saida)
+    if tipo_mov == "pendulo":
+        mov_pendular.simula(lista_pontos, dados_experimento, arquivo_saida)
 
 def main():
 
@@ -119,6 +121,16 @@ def main():
         dados_brutos_travessia = "entradasProcessadas/projetil%d" %idx
         dados_travessia = le_dados(dados_brutos_travessia)
         simula_pontos(1,dados_travessia,dados_experimento, "saidas/projetil%d" %idx)
+        idx += 1
+
+    f = open('resumo_pendulo.txt', 'w')
+    f.write("Seguem abaixo dados que serao usados para verificacao do programa:\n")
+    f.close()
+    idx = 1
+    while idx <= 5:
+        dados_brutos_travessia = "entradasProcessadas/circular%d" %idx
+        dados_travessia = le_dados(dados_brutos_travessia)
+        simula_pontos("pendulo", dados_travessia, dados_experimento, "saidas/pendulo%d" %idx)
         idx += 1
 
 

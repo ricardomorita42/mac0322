@@ -30,7 +30,7 @@ def simula_euler(lista_pontos, dados_experimento, arquivo_saida):
     #dados do experimento que contem a altura inicial do nazista antes de ser lançado abismo a baixo
     altura_inicial = dados_experimento
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida, 'w')
     f.write("Instante(s),Pos_y(m)\n")
@@ -66,7 +66,7 @@ def simula_euler(lista_pontos, dados_experimento, arquivo_saida):
     f2.write("Af de %s: %f\n" %( arquivo_saida, a_atual))
     f2.close()
 
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
 
 
 
@@ -77,7 +77,7 @@ def simula_euler_cromer(lista_pontos, dados_experimento, arquivo_saida):
     #dados do experimento que contem a altura inicial do nazista antes de ser lançado abismo a baixo
     altura_inicial = dados_experimento
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida, 'w')
     f.write("Instante(s),Pos_y(m)\n")
@@ -106,6 +106,6 @@ def simula_euler_cromer(lista_pontos, dados_experimento, arquivo_saida):
         a_anterior = a_atual
     
     f.close()
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
 
 

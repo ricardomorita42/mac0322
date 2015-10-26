@@ -39,7 +39,7 @@ def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
     periodo = tempo / voltas            #Tempo de uma volta
     vel_ang = 2 * math.pi / periodo     #Velocidade Angular
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida,'w')
     f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
@@ -56,7 +56,7 @@ def simula_analitico(lista_pontos, dados_experimento,arquivo_saida):
 
     f.close()
 
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
 
 def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     #dados do experimento contêm raio e número de voltas dadas.
@@ -67,7 +67,7 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     periodo = tempo / voltas            #Tempo de uma volta
     vel_ang = 2 * math.pi / periodo     #Velocidade Angular
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida,'w')
     f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
@@ -113,7 +113,7 @@ def simula_euler(lista_pontos, dados_experimento,arquivo_saida):
     f2.write("teta de %s: %f\n" %(arquivo_saida, teta_atual))
     f2.close()
 
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
 
 #Obs.: Como a velocidade angular é constante, o algoritmo de Euler-Cromer
 #dá o mesmo resultado do que o de Euler.
@@ -126,7 +126,7 @@ def simula_euler_cromer(lista_pontos, dados_experimento,arquivo_saida):
     periodo = tempo / voltas            #Tempo de uma volta
     vel_ang = 2 * math.pi / periodo     #Velocidade Angular
 
-    print "Preparando %s..." %arquivo_saida
+    print("Preparando %s..." %arquivo_saida)
 
     f = open(arquivo_saida,'w')
     f.write("Instante(s),Pos_ang(rad),Pos_x(m),Pos_y(m)\n")
@@ -168,4 +168,4 @@ def simula_euler_cromer(lista_pontos, dados_experimento,arquivo_saida):
 
     f.close()
 
-    print "Arquivo %s criado.\n\n" %arquivo_saida
+    print("Arquivo %s criado.\n\n" %arquivo_saida)
