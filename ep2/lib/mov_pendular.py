@@ -10,6 +10,7 @@ __author__ = 'Liron'
 
 import math
 import constantes
+import matplotlib as pyplot
 
 g = constantes.G
 L = constantes.comprimento
@@ -57,16 +58,13 @@ def simula_euler(lista_pontos, arquivo_saida):
     teta_anterior = teta_atual
     w_anterior = omega(w0, teta0, 0)
 
-    x_atual = []
-    y_atual = []
-
     for ponto_atual in lista_pontos:
         delta_t = ponto_atual - t_anterior
         w_atual = omega(w_anterior, teta_anterior, delta_t)
         teta_atual = teta(teta_anterior, w_anterior, delta_t)
 
-        x_atual.append(L * math.cos(teta_atual))
-        y_atual.append(L * math.sin(teta_atual))
+        x_atual = L * math.cos(teta_atual)
+        y_atual = L * math.sin(teta_atual)
 
         f.write(str(round(ponto_atual,3)) + ',' +
                 str(round(teta_atual,3)) + ',' +
@@ -85,12 +83,6 @@ def simula_euler(lista_pontos, arquivo_saida):
     f2.close()
 
     print("Arquivo %s criado.\n\n" %arquivo_saida)
-
-    pyplot.figure(0)
-    pyplot.plot(x_atual,y_atual,label='Euler',linestyle='',marker='o')
-    #pyplot.plot(tempo,x_atual,label='Euler')
-    pyplot.title('Pendulo')
-    pyplot.show()
 
 #Obs.: Como a velocidade angular é constante, o algoritmo de Euler-Cromer
 #dá o mesmo resultado do que o de Euler.
