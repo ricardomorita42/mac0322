@@ -4,8 +4,3 @@ teta de saidas/circular2_euler.csv: 37.699112
 teta de saidas/circular3_euler.csv: 37.699112
 teta de saidas/circular4_euler.csv: 31.415927
 teta de saidas/circular5_euler.csv: 37.699112
-teta de saidas/pendulo1: 0.731272
-teta de saidas/pendulo2: 0.375532
-teta de saidas/pendulo3: -0.168847
-teta de saidas/pendulo4: 1.155267
-teta de saidas/pendulo5: 0.910178

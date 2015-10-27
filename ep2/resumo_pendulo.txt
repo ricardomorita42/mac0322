@@ -1,1 +1,11 @@
 Seguem abaixo dados que serao usados para verificacao do programa:
+teta de saidas/pendulo1_euler.csv: 0.731272
+teta de saidas/pendulo1_euler-cromer.csv: 0.731272
+teta de saidas/pendulo2_euler.csv: 0.375532
+teta de saidas/pendulo2_euler-cromer.csv: 0.375532
+teta de saidas/pendulo3_euler.csv: -0.168847
+teta de saidas/pendulo3_euler-cromer.csv: -0.168847
+teta de saidas/pendulo4_euler.csv: 1.155267
+teta de saidas/pendulo4_euler-cromer.csv: 1.155267
+teta de saidas/pendulo5_euler.csv: 0.910178
+teta de saidas/pendulo5_euler-cromer.csv: 0.910178
