@@ -13,9 +13,9 @@ import constantes
 import matplotlib as pyplot
 
 g = constantes.G
-L = constantes.comprimento
-teta0 = constantes.teta0
-w0 = constantes.w0
+L = 0.7
+teta0 = 45
+w0 = 1.0
 
 #Os padroes utilizados nessa biblioteca seguem os padroes utilizados no arquivo mov_inclinado.py
 
