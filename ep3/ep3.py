@@ -7,9 +7,8 @@
 #       Ricardo Mikio Morita                5412562
 #
 #   Referencias:
-#       http://codereview.stackexchange.com/a/108121
+#      https://jakevdp.github.io/blog/2013/08/07/conways-game-of-life/
 
-#rodar easy_install prettytable no terminal para instalar esta lib
 import sys
 sys.path.append('lib/') #permite ler as funcoes de lib/
 

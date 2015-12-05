@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#   Nomes:                              no. USP:
+#       Bruno Guilherme Ricci Lucas         4460596
+#       Lucas Hiroshi Hayashida             7557630
+#       Ricardo Mikio Morita                5412562
+#
+#   Referencias:
+#       http://codereview.stackexchange.com/a/108121
 
 #rodar easy_install prettytable no terminal para instalar esta lib
 from prettytable import PrettyTable
