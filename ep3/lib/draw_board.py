@@ -3,8 +3,10 @@
 #
 #   Nomes:                              no. USP:
 #       Bruno Guilherme Ricci Lucas         4460596
+#       Diego Alvarez                       7557310
 #       Lucas Hiroshi Hayashida             7557630
 #       Ricardo Mikio Morita                5412562
+#       Sérgio Rosendo da Silva Júnior      6508702
 #
 #   Referencias:
 #       http://codereview.stackexchange.com/a/108121
