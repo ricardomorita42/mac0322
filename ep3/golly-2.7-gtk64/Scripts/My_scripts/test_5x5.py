@@ -196,7 +196,7 @@ for test_list in partial_cell_list:
 
     # --------------------------------------------------------------------
 
-    while not oscillating() and iterations < 10000:
+    while not oscillating() and iterations < 4000:
         g.run(1)
         iterations += 1
 
