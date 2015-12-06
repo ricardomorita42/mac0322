@@ -169,7 +169,7 @@ partial_cell_list = create_cell_list(3)
 
 trial_number= 1
 f = open('output/results_3x3.csv', 'w')
-f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status\n")
+f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed_time\n")
 
 for test_list in partial_cell_list:
 
@@ -217,12 +217,12 @@ for test_list in partial_cell_list:
         d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
 
     g.show("iteration: %d, pop: %s, density: %6f, status: %s" %(iterations,g.getpop(),d,status))
-    f.write("%d,%d,%s,%s,%f,%f,%s\n" %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status))
+    endtime = time()
+    f.write("%d,%d,%s,%s,%f,%f,%s,%f\n" %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status,(endtime - oldsecs )))
 
     #g.store(test_list,"patterns/%d.rle" %loop)
 
     fit_if_not_visible()
     trial_number +=1
-
-
 f.close()
+
