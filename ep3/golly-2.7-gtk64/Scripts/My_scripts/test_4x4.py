@@ -165,11 +165,11 @@ def create_cell_list(n):
 
 # --------------------------------------------------------------------
 
-partial_cell_list = create_cell_list(2)
+partial_cell_list = create_cell_list(4)
 
 trial_number= 1
-f = open('output/results_2x2.csv', 'w')
-f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
+f = open('output/results_4x4.csv', 'w')
+f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed_time\n")
 
 for test_list in partial_cell_list:
 
@@ -218,12 +218,11 @@ for test_list in partial_cell_list:
 
     g.show("iteration: %d, pop: %s, density: %6f, status: %s" %(iterations,g.getpop(),d,status))
     endtime = time()
-    f.write("%d,%d,%s,%s,%f,%f,%s, %f\n" %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status, (endtime - oldsecs)))
+    f.write("%d,%d,%s,%s,%f,%f,%s,%f\n" %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status,(endtime - oldsecs )))
 
     #g.store(test_list,"patterns/%d.rle" %loop)
 
     fit_if_not_visible()
     trial_number +=1
-
-    f.write("Elapsed time: %f" %(endtime - oldsecs))
 f.close()
+
