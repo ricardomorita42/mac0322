@@ -1,24 +1,14 @@
-# Based on Oscar is an OSCillation AnalyzeR for use with Golly.
-# Author: Andrew Trevorrow (andrew@trevorrow.com), March 2006.
-# Modified to handle B0-and-not-S8 rules, August 2009.
-
-# This script uses Gabriel Nivasch's "keep minima" algorithm.
-# For each generation, calculate a hash value for the pattern.  Keep all of
-# the record-breaking minimal hashes in a list, with the oldest first.
-# For example, after 5 generations the saved hash values might be:
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
-#   8 12 16 24 25,
+#   Nomes:                              no. USP:
+#       Bruno Guilherme Ricci Lucas         4460596
+#       Diego Alvarez                       7557310
+#       Lucas Hiroshi Hayashida             7557630
+#       Ricardo Mikio Morita                5412562
+#       Sérgio Rosendo da Silva Júnior      6508702
 #
-# If the next hash goes down to 13 then the list can be shortened:
-#
-#   8 12 13.
-#
-# When the current hash matches one of the saved hashes, it is highly likely
-# the pattern is oscillating.  By keeping a corresponding list of generation
-# counts we can calculate the period.  We also keep lists of population
-# counts and bounding boxes; they are used to reduce the chance of spurious
-# oscillator detection due to hash collisions.  The bounding box info also
-# allows us to detect moving oscillators (spaceships/knightships).
+# Oscilation check is based on Oscar(OSCillation AnalyzeR) for use with Golly.
 
 from itertools import product
 import golly as g
@@ -175,14 +165,13 @@ def create_cell_list(n):
 
 # --------------------------------------------------------------------
 
-partial_cell_list = create_cell_list(2)
+partial_cell_list = create_cell_list(3)
 
-loop = 0
-f = open('test.log', 'w')
-f.write("iteration, pop, density, status \n")
+trial_number= 1
+f = open('output/results_3x3.csv', 'w')
+f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status\n")
 
 for test_list in partial_cell_list:
-
 
     iterations = 0
     status = ""
@@ -193,6 +182,16 @@ for test_list in partial_cell_list:
     g.show("Checking for oscillation... (hit escape to abort)")
 
     oldsecs = time()
+
+    # --------------------------------------------------------------------
+    bbox = rect( g.getrect() )
+    if bbox.empty:
+        initial_d = 0
+    else:
+        initial_d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
+    initial_pop = g.getpop()
+
+    # --------------------------------------------------------------------
 
     while not oscillating() and iterations < 10000:
         g.run(1)
@@ -207,6 +206,9 @@ for test_list in partial_cell_list:
     if iterations >= 10000:
         status = "didn't stop"
 
+    if (iterations is 0 and initial_pop == g.getpop()):
+        status = "didn't change"
+
     bbox = rect( g.getrect() )
     if bbox.empty:
         d = 0
@@ -214,12 +216,12 @@ for test_list in partial_cell_list:
         d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
 
     g.show("iteration: %d, pop: %s, density: %6f, status: %s" %(iterations,g.getpop(),d,status))
-    f.write("%d, %s, %6f, %s \n" %(iterations,g.getpop(),d,status))
+    f.write("%d,%d,%s,%s,%f,%f,%s\n" %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status))
 
-    g.store(test_list,"patterns/%d.rle" %loop)
+    #g.store(test_list,"patterns/%d.rle" %loop)
 
     fit_if_not_visible()
-    loop +=1
+    trial_number +=1
 
 
 f.close()
