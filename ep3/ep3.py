@@ -43,12 +43,12 @@ def apply_iteration(board):
         count = sum((n in board) for n in neighbors(cell))
         if count == 3 or (count == 2 and cell in board):
             new_board.add(cell)
-    
+
     return new_board
 
 
 def run_glife(board, number_of_iterations):
-	
+
     pop_size= len(board)
 
     print "estado inicial: " + str(board)
@@ -68,11 +68,11 @@ def run_glife(board, number_of_iterations):
 
 
 
-    if __name__ == "__main__":
-    #https://docs.python.org/2/library/collections.html#collections.deque
+if __name__ == "__main__":
+#https://docs.python.org/2/library/collections.html#collections.deque
 
-        board = {(1,0), (1,2), (2,0), (2,1), (2,2)}
-        number_of_iterations = 10
+    board = {(1,0), (1,2), (2,0), (2,1), (2,2)}
+    number_of_iterations = 10
 
-        run_glife(board, number_of_iterations)
-        #draw_board.draw(board)
+    run_glife(board, number_of_iterations)
+    #draw_board.draw(board)

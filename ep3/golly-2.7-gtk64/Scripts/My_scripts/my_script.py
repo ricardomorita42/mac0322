@@ -165,11 +165,20 @@ while not oscillating() and iterations < 10000:
         fit_if_not_visible()
         g.update()
 
-if iterations > 10000:
+if iterations >= 10000:
     status = "didn't stop"
 
-g.show("iteration: %d, pop: %s, status: %s" %(iterations,g.getpop(),status))
-f.write("iteration: %d ,pop: %s, status: %s" %(iterations,g.getpop(),status))
+bbox = rect( g.getrect() )
+d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
+if d < 0.000001:
+    g.show("Density = %.1e" % d)
+else:
+    g.show("Density = %.6f" % d)
+
+g.show("iteration: %d, pop: %s, density: %6f status: %s" %(iterations,g.getpop(),d,status))
+f.write("iteration: %d, pop: %s, density: %6f status: %s" %(iterations,g.getpop(),d,status))
+
+g.store(test_list,"patterns/1.rle")
 
 f.close()
 fit_if_not_visible()

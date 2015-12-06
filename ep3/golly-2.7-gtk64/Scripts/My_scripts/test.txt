@@ -1,1 +1,1 @@
-iteration: 2 ,pop: 3, status: oscillation (period = 2)
+iteration: 2, pop: 3, density: 1.000000 status: oscillation (period = 2)
