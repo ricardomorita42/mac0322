@@ -68,11 +68,11 @@ def run_glife(board, number_of_iterations):
 
 
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
     #https://docs.python.org/2/library/collections.html#collections.deque
 
-    board = {(0,1), (1,2), (2,0), (2,1), (2,2)}
-    number_of_iterations = 10
+        board = {(0,0), (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1), (2,2)}
+        number_of_iterations = 10
 
-    run_glife(board, number_of_iterations)
-    #draw_board.draw(board)
+        run_glife(board, number_of_iterations)
+        #draw_board.draw(board)
