@@ -161,6 +161,7 @@ def create_cell_list(n):
             lista.append(coordenates[2*y+1])
             lista.append(i[y])
 
+        lista.append(0)
         yield lista
 
 # --------------------------------------------------------------------
