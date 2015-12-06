@@ -1,15 +1,15 @@
 #!/usr/bin/python
 from itertools import product
+def gen_coordenates(n):
+    new_list = []
+    for x in range(0,n):
+        for y in range(0,n):
+            new_list.append(x)
+            new_list.append(y)
+    return new_list
 
-coordenates_dois= [0,0,0,1, \
-                   1,0,1,1]
+coordenates = gen_coordenates(2)
 
-coordenates_tres=[0,0,0,1,0,2, \
-                  1,0,1,1,1,2, \
-                  2,0,2,1,2,2]
-
-
-coordenates = coordenates_tres
 
 def cell_states(n):
     for i in product([0,1], repeat=n):
@@ -18,7 +18,6 @@ def cell_states(n):
 test_generator = cell_states(len(coordenates)/2)
 
 for i in test_generator:
-    #print(i)
     lista = []
 
     for y in range(len(i)):
