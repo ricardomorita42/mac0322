@@ -20,6 +20,7 @@
 # oscillator detection due to hash collisions.  The bounding box info also
 # allows us to detect moving oscillators (spaceships/knightships).
 
+from itertools import product
 import golly as g
 from glife import rect, pattern
 from time import time
@@ -143,44 +144,82 @@ def fit_if_not_visible():
     if (not r.empty) and (not r.visible()): g.fit()
 
 # --------------------------------------------------------------------
-f = open('test.txt', 'w')
+#used to create cell lists
+def gen_coordenates(n):
+    new_list = []
+    for x in range(0,n):
+        for y in range(0,n):
+            new_list.append(x)
+            new_list.append(y)
+    return new_list
 
-test_list = [0,0,0,1,0,2]
-iterations = 0
-status = ""
+def cell_states(n):
+    for i in product([0,1], repeat=n):
+        yield i
 
-g.new("")
-g.putcells(test_list,0,0,1,0,0,1,"xor")
+def create_cell_list(n):
+    coordenates = gen_coordenates(n)
+    test_generator = cell_states(len(coordenates)/2)
 
-g.show("Checking for oscillation... (hit escape to abort)")
+    final_list =[]
 
-oldsecs = time()
-while not oscillating() and iterations < 10000:
-    g.run(1)
-    iterations += 1
+    for i in test_generator:
+        lista = []
 
-    newsecs = time()
-    if newsecs - oldsecs >= 1.0:     # show pattern every second
-        oldsecs = newsecs
-        fit_if_not_visible()
-        g.update()
+        for y in range(len(i)):
+            lista.append(coordenates[2*y])
+            lista.append(coordenates[2*y+1])
+            lista.append(i[y])
 
-if iterations >= 10000:
-    status = "didn't stop"
+            yield lista
 
-bbox = rect( g.getrect() )
-d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
-if d < 0.000001:
-    g.show("Density = %.1e" % d)
-else:
-    g.show("Density = %.6f" % d)
+# --------------------------------------------------------------------
 
-g.show("iteration: %d, pop: %s, density: %6f status: %s" %(iterations,g.getpop(),d,status))
-f.write("iteration: %d, pop: %s, density: %6f status: %s" %(iterations,g.getpop(),d,status))
+partial_cell_list = create_cell_list(2)
 
-g.store(test_list,"patterns/1.rle")
+loop = 0
+f = open('test.log', 'w')
+f.write("iteration, pop, density, status \n")
+
+for test_list in partial_cell_list:
+
+
+    iterations = 0
+    status = ""
+
+    g.new("")
+    g.putcells(test_list,0,0,1,0,0,1,"xor")
+
+    g.show("Checking for oscillation... (hit escape to abort)")
+
+    oldsecs = time()
+
+    while not oscillating() and iterations < 10000:
+        g.run(1)
+        iterations += 1
+
+        newsecs = time()
+        if newsecs - oldsecs >= 1.0:     # show pattern every second
+            oldsecs = newsecs
+            fit_if_not_visible()
+            g.update()
+
+    if iterations >= 10000:
+        status = "didn't stop"
+
+    bbox = rect( g.getrect() )
+    if bbox.empty:
+        d = 0
+    else:
+        d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
+
+    g.show("iteration: %d, pop: %s, density: %6f, status: %s" %(iterations,g.getpop(),d,status))
+    f.write("%d, %s, %6f, %s \n" %(iterations,g.getpop(),d,status))
+
+    g.store(test_list,"patterns/%d.rle" %loop)
+
+    fit_if_not_visible()
+    loop +=1
+
 
 f.close()
-fit_if_not_visible()
-
-
