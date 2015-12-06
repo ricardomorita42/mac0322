@@ -34,6 +34,7 @@ boxlist = []         # corresponding bounding boxes
 
 # --------------------------------------------------------------------
 
+
 def show_spaceship_speed(period, deltax, deltay):
     # we found a moving oscillator
     if period == 1:
@@ -58,12 +59,14 @@ def show_spaceship_speed(period, deltax, deltay):
 
 def oscillating():
     # return True if the pattern is empty, stable or oscillating
+    global status
 
     # first get current pattern's bounding box
     prect = g.getrect()
     pbox = rect(prect)
     if pbox.empty:
         g.show("The pattern is empty.")
+        status = "empty"
         return True
 
     # get current pattern and create hash of "normalized" version -- ie. shift
@@ -109,10 +112,12 @@ def oscillating():
                 if period == 1:
                     if pbox == boxlist[pos]:
                         g.show("The pattern is stable.")
+                        status = "stable"
                     else:
                         show_spaceship_speed(1, 0, 0)
                 elif pbox == boxlist[pos]:
                     g.show("Oscillator detected (period = " + str(period) + ")")
+                    status = "oscillation (period = " + str(period) + ")"
                 else:
                     deltax = abs(boxlist[pos].x - pbox.x)
                     deltay = abs(boxlist[pos].y - pbox.y)
@@ -138,20 +143,35 @@ def fit_if_not_visible():
     if (not r.empty) and (not r.visible()): g.fit()
 
 # --------------------------------------------------------------------
+f = open('test.txt', 'w')
 
 test_list = [0,0,0,1,0,2]
+iterations = 0
+status = ""
+
 g.new("")
 g.putcells(test_list,0,0,1,0,0,1,"xor")
 
 g.show("Checking for oscillation... (hit escape to abort)")
 
 oldsecs = time()
-while not oscillating():
+while not oscillating() and iterations < 10000:
     g.run(1)
+    iterations += 1
+
     newsecs = time()
     if newsecs - oldsecs >= 1.0:     # show pattern every second
         oldsecs = newsecs
         fit_if_not_visible()
         g.update()
 
+if iterations > 10000:
+    status = "didn't stop"
+
+g.show("iteration: %d, pop: %s, status: %s" %(iterations,g.getpop(),status))
+f.write("iteration: %d ,pop: %s, status: %s" %(iterations,g.getpop(),status))
+
+f.close()
 fit_if_not_visible()
+
+
