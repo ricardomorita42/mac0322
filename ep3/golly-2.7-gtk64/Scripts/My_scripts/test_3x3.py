@@ -177,6 +177,7 @@ for test_list in partial_cell_list:
     status = ""
 
     g.new("")
+    g.reset()
     g.putcells(test_list,0,0,1,0,0,1,"xor")
 
     g.show("Checking for oscillation... (hit escape to abort)")
