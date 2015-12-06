@@ -11,6 +11,7 @@
 #   Referencias:
 #      https://jakevdp.github.io/blog/2013/08/07/conways-game-of-life/
 
+from collections import deque
 import sys
 sys.path.append('lib/') #permite ler as funcoes de lib/
 
@@ -46,15 +47,21 @@ def apply_iteration(board):
     return new_board
 
 if __name__ == "__main__":
+    #https://docs.python.org/2/library/collections.html#collections.deque
+    recent_scores = deque()
+
     board = {(0,1), (1,2), (2,0), (2,1), (2,2)}
     number_of_iterations = 2
     pop_size= len(board)
 
+    score = sum(cell[0]+cell[1] for cell in board)
+
     print "estado inicial: " + str(board)
     print "numero de iterações: " + str(number_of_iterations)
     print "tamanho pop: " + str(pop_size)
+    print score
 
-    draw_board.draw(board)
+    #draw_board.draw(board)
 
     for _ in xrange(number_of_iterations):
         board = apply_iteration(board)
@@ -65,4 +72,4 @@ if __name__ == "__main__":
     print "estado final: " + str(board)
     print "tamanho pop: " +  str(pop_size)
 
-    draw_board.draw(board)
+    #draw_board.draw(board)
