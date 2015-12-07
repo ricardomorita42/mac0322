@@ -213,7 +213,7 @@ for test_list in partial_cell_list:
     if iterations >= max_iter:
         status = "didn't stop"
         #f2.write("%d,%s\n" %(trial_number,str(test_list)))
-        g.store(test_list,"patterns/3x3_%d.rle" %trial_number)
+        #g.store(test_list,"patterns/3x3_%d.rle" %trial_number)
 
     if (iterations is 0 and initial_pop == g.getpop()):
         status = "didn't change"

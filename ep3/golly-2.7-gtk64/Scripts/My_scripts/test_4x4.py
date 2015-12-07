@@ -210,7 +210,7 @@ for test_list in partial_cell_list:
 
     if iterations >= max_iter:
         status = "didn't stop"
-        g.store(test_list,"patterns/4x4_%d.rle" %trial_number)
+        #g.store(test_list,"patterns/4x4_%d.rle" %trial_number)
 
     if (iterations is 0 and initial_pop == g.getpop()):
         status = "didn't change"
