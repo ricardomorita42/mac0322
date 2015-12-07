@@ -31,39 +31,19 @@ hashlist = []        # for pattern hash values
 genlist = []         # corresponding generation counts
 poplist = []         # corresponding population counts
 boxlist = []         # corresponding bounding boxes
-
-# --------------------------------------------------------------------
-
-def show_spaceship_speed(period, deltax, deltay):
-    # we found a moving oscillator
-    if period == 1:
-        g.show("Spaceship detected (speed = c)")
-    elif (deltax == deltay) or (deltax == 0) or (deltay == 0):
-        speed = ""
-        if (deltax == 0) or (deltay == 0):
-            # orthogonal spaceship
-            if (deltax > 1) or (deltay > 1):
-                speed += str(deltax + deltay)
-        else:
-            # diagonal spaceship (deltax == deltay)
-            if deltax > 1:
-                speed += str(deltax)
-        g.show("Spaceship detected (speed = " + speed + "c/" +str(period) + ")")
-    else:
-        # deltax != deltay and both > 0
-        speed = str(deltay) + "," + str(deltax)
-        g.show("Knightship detected (speed = " + speed + "c/" + str(period) + ")")
+status = ''          # detected oscillation status
 
 # --------------------------------------------------------------------
 
 def oscillating():
     # return True if the pattern is empty, stable or oscillating
+    global status
 
     # first get current pattern's bounding box
     prect = g.getrect()
     pbox = rect(prect)
     if pbox.empty:
-        g.show("The pattern is empty.")
+        status = "empty"
         return True
 
     # get current pattern and create hash of "normalized" version -- ie. shift
@@ -108,15 +88,12 @@ def oscillating():
 
                 if period == 1:
                     if pbox == boxlist[pos]:
-                        g.show("The pattern is stable.")
-                    else:
-                        show_spaceship_speed(1, 0, 0)
+                        status = "stable"
                 elif pbox == boxlist[pos]:
-                    g.show("Oscillator detected (period = " + str(period) + ")")
+                    status = "period_" + str(period)
                 else:
                     deltax = abs(boxlist[pos].x - pbox.x)
                     deltay = abs(boxlist[pos].y - pbox.y)
-                    show_spaceship_speed(period, deltax, deltay)
                 return True
             else:
                 # look at next matching hash value or insert if no more
@@ -138,16 +115,3 @@ def fit_if_not_visible():
     if (not r.empty) and (not r.visible()): g.fit()
 
 # --------------------------------------------------------------------
-
-g.show("Checking for oscillation... (hit escape to abort)")
-
-oldsecs = time()
-while not oscillating():
-    g.run(1)
-    newsecs = time()
-    if newsecs - oldsecs >= 1.0:     # show pattern every second
-        oldsecs = newsecs
-        fit_if_not_visible()
-        g.update()
-
-fit_if_not_visible()
