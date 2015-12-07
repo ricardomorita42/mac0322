@@ -35,6 +35,14 @@ status = ''          # detected oscillation status
 
 # --------------------------------------------------------------------
 
+def clear():
+	global hashlist, genlist, poplist, boxlist, status
+	hashlist = []
+	genlist = []
+	poplist = []
+	boxlist = []
+	status = ''
+
 def oscillating():
     # return True if the pattern is empty, stable or oscillating
     global status

@@ -59,13 +59,14 @@ rlepatterns_filename = "patterns/patterns_" + name + "-%d.rle"
 g.autoupdate(False)
 f = open(out_filename, 'w')
 f.write("id, number_of_iterations, initial_pop, final_pop, initial_density, final_density, end_status, elapsed_time\n")
-f2 = open(patterns_filename, 'w')
-f2.write("id, initial_cell_list\n")
+#f2 = open(patterns_filename, 'w')
+#f2.write("id, initial_cell_list\n")
 
 trial_number = 1
 for test_list in create_cell_list(grid_size):
     iterations = 0
     status = ''
+    o.clear()
     g.new(name)
     g.reset()
     g.putcells(test_list)
@@ -75,7 +76,7 @@ for test_list in create_cell_list(grid_size):
 
     start_time = time()
     while not o.oscillating() and iterations<max_iter:
-        g.run(1)
+        g.step()
         iterations += 1
     end_time = time()
 
@@ -83,8 +84,8 @@ for test_list in create_cell_list(grid_size):
 
     if iterations >= max_iter:
         status = "timeout"
-        f2.write("%d, %s\n" % (trial_number, str(test_list)))
-        g.store(test_list, rlepatterns_filename%(trial_number))
+        #f2.write("%d, %s\n" % (trial_number, str(test_list)))
+        #g.store(test_list, rlepatterns_filename%(trial_number))
 
     elif iterations==0 and initial_pop==g.getpop():
         status = "no_change"
@@ -99,4 +100,4 @@ for test_list in create_cell_list(grid_size):
 g.update()
 o.fit_if_not_visible()
 f.close()
-f2.close()
+#f2.close()
