@@ -103,8 +103,8 @@ for test_list in create_cell_list(grid_size):
             else:
                 status = "glider"
 
-    if status is 'glider':
-        g.store(test_list, rlepatterns_filename%(trial_number))
+    #if status is 'glider':
+    #    g.store(test_list, rlepatterns_filename%(trial_number))
 
     d = calculate_density()
     f.write("%d, %d, %s, %s, %f, %f, %s, %f\n" % (trial_number, iterations, initial_pop, g.getpop(), initial_d, d, status, end_time-start_time))
