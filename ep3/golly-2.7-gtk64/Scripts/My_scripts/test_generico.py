@@ -62,7 +62,7 @@ rlepatterns_filename = "patterns/patterns_" + name + "-%d.rle"
 
 g.autoupdate(False)
 f = open(out_filename, 'w')
-f.write("id, number_of_iterations, initial_pop, final_pop, initial_density, final_density, end_status, elapsed_time\n")
+f.write("id,number_of_iterations,initial_pop,final_pop,initial_density,final_density,end_status,elapsed_time\n")
 #f2 = open(patterns_filename, 'w')
 #f2.write("id, initial_cell_list\n")
 
@@ -91,7 +91,7 @@ for test_list in create_cell_list(grid_size):
         #f2.write("%d, %s\n" % (trial_number, str(test_list)))
         #g.store(test_list, rlepatterns_filename%(trial_number))
 
-    elif initial_pop==g.getpop() and status == '':
+    elif initial_pop<=g.getpop() and status == '':
         if iterations==0:
             status = "no_change"
         elif g.empty() == False:
@@ -107,7 +107,7 @@ for test_list in create_cell_list(grid_size):
     #    g.store(test_list, rlepatterns_filename%(trial_number))
 
     d = calculate_density()
-    f.write("%d, %d, %s, %s, %f, %f, %s, %f\n" % (trial_number, iterations, initial_pop, g.getpop(), initial_d, d, status, end_time-start_time))
+    f.write("%d,%d,%s,%s,%f,%f,%s,%f\n" % (trial_number, iterations, initial_pop, g.getpop(), initial_d, d, status, end_time-start_time))
 
     progress = float(100*(trial_number+1)) / float(number_of_tests)
     g.show("progress: %.1f%%, iterations: %d, pop: %s, density: %6f, status: %s" % (progress, iterations, g.getpop(), d, status))
