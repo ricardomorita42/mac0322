@@ -166,18 +166,19 @@ def create_cell_list(n):
         yield lista
 
 # --------------------------------------------------------------------
-
-partial_cell_list = create_cell_list(2)
-
-number_of_tests = 2 ** (2 ** 2)
-
+grid_size = 2
+max_iter = grid_size * 500
+number_of_tests = 2 ** (grid_size ** 2)
 trial_number= 1
 
+partial_cell_list = create_cell_list(grid_size)
+
+
 f = open('output/results_2x2.csv', 'w')
-f2 = open('patterns/patterns_2x2.csv', 'w')
+#f2 = open('patterns/patterns_2x2.csv', 'w')
 
 f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
-f2.write("id, initial_cell_list")
+#f2.write("id, initial_cell_list")
 
 for test_list in partial_cell_list:
 
@@ -202,7 +203,8 @@ for test_list in partial_cell_list:
 
     # --------------------------------------------------------------------
 
-    while not oscillating() and iterations < 4000:
+
+    while not oscillating() and iterations < max_iter:
         g.run(1)
         iterations += 1
 
@@ -212,8 +214,10 @@ for test_list in partial_cell_list:
             fit_if_not_visible()
             g.update()
 
-    if iterations >= 4000:
+    if iterations >= max_iter:
         status = "didn't stop"
+        #f2.write("%d,%s\n" %(trial_number,str(test_list)))
+        g.store(test_list,"patterns/2x2_%d.rle" %trial_number)
 
     if (iterations is 0 and initial_pop == g.getpop()):
         status = "didn't change"
@@ -230,11 +234,10 @@ for test_list in partial_cell_list:
     endtime = time()
     f.write("%d,%d,%s,%s,%f,%f,%s, %f, " %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status, (endtime - oldsecs)))
 
-    #g.store(test_list,"patterns/%d.rle" %loop)
 
     fit_if_not_visible()
     trial_number +=1
 
     f.write("%f\n" %(endtime - oldsecs))
 f.close()
-f2.close()
+#f2.close()
