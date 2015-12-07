@@ -172,8 +172,12 @@ partial_cell_list = create_cell_list(2)
 number_of_tests = 2 ** (2 ** 2)
 
 trial_number= 1
+
 f = open('output/results_2x2.csv', 'w')
+f2 = open('patterns/patterns_2x2.csv', 'w')
+
 f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
+f2.write("id, initial_cell_list")
 
 for test_list in partial_cell_list:
 
@@ -208,7 +212,7 @@ for test_list in partial_cell_list:
             fit_if_not_visible()
             g.update()
 
-    if iterations >= 10000:
+    if iterations >= 4000:
         status = "didn't stop"
 
     if (iterations is 0 and initial_pop == g.getpop()):
@@ -233,3 +237,4 @@ for test_list in partial_cell_list:
 
     f.write("%f\n" %(endtime - oldsecs))
 f.close()
+f2.close()

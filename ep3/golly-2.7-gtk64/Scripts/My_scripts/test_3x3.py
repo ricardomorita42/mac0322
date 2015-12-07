@@ -206,7 +206,7 @@ for test_list in partial_cell_list:
             fit_if_not_visible()
             g.update()
 
-    if iterations >= 10000:
+    if iterations >= 4000:
         status = "didn't stop"
 
     if (iterations is 0 and initial_pop == g.getpop()):
