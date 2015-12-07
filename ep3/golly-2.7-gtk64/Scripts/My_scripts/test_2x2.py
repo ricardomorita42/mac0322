@@ -169,6 +169,8 @@ def create_cell_list(n):
 
 partial_cell_list = create_cell_list(2)
 
+number_of_tests = 2 ** (2 ** 2)
+
 trial_number= 1
 f = open('output/results_2x2.csv', 'w')
 f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
@@ -218,7 +220,9 @@ for test_list in partial_cell_list:
     else:
         d = float( g.getpop() ) / ( float(bbox.wd) * float(bbox.ht) )
 
-    g.show("iteration: %d, pop: %s, density: %6f, status: %s" %(iterations,g.getpop(),d,status))
+    progress = 1.0 * trial_number / number_of_tests * 100
+
+    g.show("progress: %.1f%%, iteration: %d, pop: %s, density: %6f, status: %s" %(progress,iterations,g.getpop(),d,status))
     endtime = time()
     f.write("%d,%d,%s,%s,%f,%f,%s, %f, " %(trial_number,iterations,initial_pop,g.getpop(),initial_d,d,status, (endtime - oldsecs)))
 
