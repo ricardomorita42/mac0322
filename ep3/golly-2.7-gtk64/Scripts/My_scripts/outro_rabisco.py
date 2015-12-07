@@ -41,6 +41,8 @@ def create_cell_list(n):
             lista.append(coordenates[2*y+1])
             lista.append(i[y])
 
+        if len(lista) % 2 == 0:
+            lista.append(0)
         yield lista
 
 # --------------------------------------------------------------------
@@ -48,10 +50,10 @@ def create_cell_list(n):
 partial_cell_list = create_cell_list(2)
 
 trial_number= 1
-f = open('output/results_2x2.csv', 'w')
-f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
+#f = open('output/results_2x2.csv', 'w')
+#f.write("id,number of iterations,initial_pop,final_pop,initial_density,final_density,end_status, elapsed time\n")
 
 for test_list in partial_cell_list:
     print test_list
 
-f.close()
+#f.close()

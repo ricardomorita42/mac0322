@@ -35,6 +35,10 @@ def create_cell_list(n):
             lista.append(coordinates[2*y])
             lista.append(coordinates[2*y+1])
             lista.append(i[y])
+
+        if len(lista) % 2 == 0:
+            lista.append(0)
+
         yield lista
 
 #calculate density of cells
@@ -87,8 +91,20 @@ for test_list in create_cell_list(grid_size):
         #f2.write("%d, %s\n" % (trial_number, str(test_list)))
         #g.store(test_list, rlepatterns_filename%(trial_number))
 
-    elif iterations==0 and initial_pop==g.getpop():
-        status = "no_change"
+    elif initial_pop==g.getpop() and status == '':
+        if iterations==0:
+            status = "no_change"
+        elif g.empty() == False:
+            current_clist = g.hash(g.getrect())
+            g.step()
+            next_clist = g.hash(g.getrect())
+            if current_clist == next_clist:
+                status = "stable"
+            else:
+                status = "glider"
+
+    if status is 'glider':
+        g.store(test_list, rlepatterns_filename%(trial_number))
 
     d = calculate_density()
     f.write("%d, %d, %s, %s, %f, %f, %s, %f\n" % (trial_number, iterations, initial_pop, g.getpop(), initial_d, d, status, end_time-start_time))
